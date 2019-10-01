@@ -81,3 +81,17 @@ installDependencies:
 	npm install elm-live@"^3.x.x" --no-package-lock
 	npm install uglify-js@"^3.x.x" --no-package-lock
 ```
+
+## Generating elm file content from files
+https://gist.github.com/choonkeat/b9959168e15d813d9f8a84d0e2c9632a
+
+###Makefile
+```
+generate: src/Files.elm src/Templates.elm
+
+src/Files.elm: files-as-elm-methods.js $(shell find public)
+	node files-as-elm-methods.js public > src/Files.elm
+
+src/Templates.elm: filecontent-as-elm-methods.js $(shell find public)
+	node filecontent-as-elm-methods.js public > src/Templates.elm
+```

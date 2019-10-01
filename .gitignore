@@ -1,5 +1,8 @@
 # Distribution
 build/
+main.js
+src/Files.elm
+src/Templates.elm
 
 # elm-package generated files
 elm-stuff

@@ -1,4 +1,4 @@
-module Common.Types.Language exposing (Language(..), decode, toString, toggle)
+module Language exposing (Language(..), decode, toString, toggle)
 
 import Json.Decode
 

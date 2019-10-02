@@ -1,8 +1,8 @@
-module Common.Button.View exposing (default, link, maxSize, small)
+module Button exposing (default, link, maxSize, small)
 
-import Common.Utilities exposing (onClickWithPreventDefault)
 import Html exposing (Html, a, button)
 import Html.Attributes exposing (class, classList, disabled, href, src)
+import Utilities exposing (onClickWithPreventDefault)
 
 
 internalButton : List String -> msg -> Bool -> List (Html msg) -> Html msg

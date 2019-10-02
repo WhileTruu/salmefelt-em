@@ -1,4 +1,4 @@
-module Common.Utilities exposing (ifThenElse, onClickWithPreventDefault)
+module Utilities exposing (ifThenElse, onClickWithPreventDefault)
 
 import Html
 import Html.Events

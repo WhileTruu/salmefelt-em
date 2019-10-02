@@ -1,4 +1,4 @@
-module Common.Logo exposing (..)
+module Logo exposing (..)
 
 import Svg exposing (Svg)
 import Svg.Attributes

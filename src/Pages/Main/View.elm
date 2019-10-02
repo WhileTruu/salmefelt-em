@@ -60,15 +60,10 @@ view translations language products =
             ++ (products
                     |> Dict.toList
                     |> List.sortBy (Tuple.second >> .position)
-                    |> List.foldl
-                        (\( index, product ) accumulator ->
-                            if product.visible then
-                                accumulator ++ [ productList language index product ]
-
-                            else
-                                accumulator
+                    |> List.map
+                        (\( index, product ) ->
+                            productList language index product
                         )
-                        []
                )
         )
     ]

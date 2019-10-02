@@ -1,7 +1,7 @@
 module Common.Types.Product exposing (Product, decoder)
 
 import Common.Types.Product.Images as ProductImages exposing (ProductImages)
-import Json.Decode exposing (Decoder, bool, decodeString, decodeValue, field, int, list, string)
+import Json.Decode exposing (Decoder, field, int, string)
 
 
 type alias Product =
@@ -12,18 +12,15 @@ type alias Product =
     , descriptionEN : String
     , descriptionET : String
     , images : ProductImages
-    , visible : Bool
     }
 
 
 decoder : Decoder Product
 decoder =
-    Json.Decode.succeed Product
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "id" int))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "position" int))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "nameEn" string))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "nameEt" string))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "descriptionEn" string))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "descriptionEt" string))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "images" ProductImages.decoder))
-        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "visible" bool))
+    Json.Decode.succeed (Product 0)
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "priority" int))
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "titleEn" string))
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "titleEt" string))
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "bodyEn" string))
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "bodyEt" string))
+        |> Json.Decode.andThen (\a -> Json.Decode.map a (field "galleryImages" ProductImages.decoder))

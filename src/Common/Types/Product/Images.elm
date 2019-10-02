@@ -51,12 +51,7 @@ selected (ProductImages { head, tail }) =
 
 productImageDecoder : Decoder ProductImage
 productImageDecoder =
-    ProductImage
-        |> Decode.succeed
-        |> Decode.andThen (\a -> Decode.map a (Decode.field "id" Decode.int))
-        |> Decode.andThen (\a -> Decode.map a (Decode.field "fullSize" Decode.string))
-        |> Decode.andThen (\a -> Decode.map a (Decode.field "optimized" Decode.string))
-        |> Decode.andThen (\a -> Decode.map a (Decode.field "thumbnail" Decode.string))
+    Decode.string |> Decode.map (\a -> ProductImage 1 a a a)
 
 
 decoder : Decoder ProductImages

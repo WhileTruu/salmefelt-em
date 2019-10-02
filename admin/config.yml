@@ -26,7 +26,6 @@ collections:
       - {label: "English title", name: "titleEn", widget: "string", required: true}
       - {label: "Estonian title", name: "titleEt", widget: "string", required: true}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image"}
       - {label: "Priority", name: "priority", widget: "number", valueType: "int", default: 0, min: 0}
       - {label: "English body", name: "bodyEn", widget: "markdown"}
       - {label: "Estonian body", name: "bodyEt", widget: "markdown"}

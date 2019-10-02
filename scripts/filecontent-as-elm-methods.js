@@ -35,7 +35,8 @@ process.argv.slice(2).forEach(function (basedir, index) {
 })
 
 console.log('module RawItems exposing')
-Object.keys(listing).forEach(function (key, index) {
+
+new Array('all').concat(Object.keys(listing)).forEach(function (key, index) {
     var prefix = '    ,'
     if (index === 0) prefix = '    ('
     console.log(prefix, key)

@@ -11,7 +11,7 @@ media_folder: "static/uploads" # Media files will be stored in the repo under im
 slug:
   encoding: "ascii"
   clean_accents: true
-  sanitize_replacement: "_"
+  sanitize_replacement: "-"
 
 collections:
   - name: "item" # Used in routes, e.g., /admin/collections/blog

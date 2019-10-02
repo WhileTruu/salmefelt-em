@@ -8,7 +8,6 @@ import Common.Types.Product as Product exposing (Product)
 import Common.Types.Product.Images as ProductImages exposing (ProductImage)
 import Dict exposing (Dict)
 import Json.Decode
-import RawItems
 import Routing
 import Types exposing (Flags, Model, Msg(..))
 import Url exposing (Url)
@@ -27,11 +26,7 @@ init flags url key =
             flags
                 |> Json.Decode.decodeValue Language.decode
                 |> Result.withDefault Language.EN
-      , products =
-            RawItems.all
-                |> List.filterMap (Json.Decode.decodeString Product.decoder >> Debug.log "" >> Result.toMaybe)
-                |> List.indexedMap Tuple.pair
-                |> Dict.fromList
+      , products = Dict.empty
       }
     , Cmd.none
     )

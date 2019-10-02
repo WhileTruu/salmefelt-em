@@ -92,6 +92,6 @@ generate: src/Files.elm src/Templates.elm
 src/Files.elm: files-as-elm-methods.js $(shell find public)
 	node files-as-elm-methods.js public > src/Files.elm
 
-src/Templates.elm: filecontent-as-elm-methods.js $(shell find public)
-	node filecontent-as-elm-methods.js public > src/Templates.elm
+src/Templates.elm: item-json-files-as-elm-module.js $(shell find public)
+	node item-json-files-as-elm-module.js public > src/Templates.elm
 ```

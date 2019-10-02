@@ -2,7 +2,7 @@
 build/
 main.js
 src/Files.elm
-src/Templates.elm
+src/RawItems.elm
 
 # elm-package generated files
 elm-stuff

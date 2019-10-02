@@ -34,13 +34,25 @@ process.argv.slice(2).forEach(function (basedir, index) {
     onfiles(basedir, basedir, fs.readdirSync(basedir))
 })
 
-console.log('module Templates exposing')
+console.log('module RawItems exposing')
 Object.keys(listing).forEach(function (key, index) {
     var prefix = '    ,'
     if (index === 0) prefix = '    ('
     console.log(prefix, key)
 })
 console.log('    )')
+
+console.log('')
+console.log('')
+console.log('all : List String')
+console.log('all =')
+Object.keys(listing).forEach(function (key, index) {
+    var prefix = '    ,'
+    if (index === 0) prefix = '    ['
+    console.log(prefix, key)
+})
+console.log('    ]')
+
 Object.keys(listing).forEach(function (key, index) {
     console.log('')
     console.log('')

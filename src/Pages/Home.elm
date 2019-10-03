@@ -1,14 +1,19 @@
 module Pages.Home exposing (Msg, update, view)
 
 import Button
-import Html exposing (Html, div, h2, h3, img, p, section, text)
-import Html.Attributes exposing (alt, class, href, src)
+import Css
+import Css.Media
+import Html
+import Html.Styled
+import Html.Styled.Attributes
+import Html.Styled.Events
 import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
 import Logo
 import Route exposing (Route)
 import Session exposing (Session)
+import Svg.Styled
 import Translations exposing (Translations)
 
 
@@ -21,12 +26,12 @@ t session translate =
     translate <| Translations.forLanguage session.language
 
 
-intro : Session -> Html msg
+intro : Session -> Html.Styled.Html msg
 intro session =
-    p [ class "intro" ]
+    Html.Styled.p [ Html.Styled.Attributes.class "intro" ]
         (t session .body_text
-            |> List.map text
-            |> List.intersperse (Html.br [] [])
+            |> List.map Html.Styled.text
+            |> List.intersperse (Html.Styled.br [] [])
         )
 
 
@@ -40,104 +45,172 @@ getName language item =
             item.titleEt
 
 
-productButton : Int -> Item -> String -> Html Msg
+productButton : Int -> Item -> String -> Html.Styled.Html msg
 productButton index item path =
-    Button.maxSize
-        (ClickedChangeRoute (Route.Item index 0))
-        False
-        [ div
-            [ class "square-image-container" ]
-            [ img
-                [ src path
-                , alt <| item.titleEn ++ " " ++ String.fromInt index
+    Html.Styled.a
+        [ Html.Styled.Attributes.class "button max-size"
+        , Route.styledHref (Route.Item index 0)
+        ]
+        [ Html.Styled.div
+            [ Html.Styled.Attributes.class "square-image-container" ]
+            [ Html.Styled.img
+                [ Html.Styled.Attributes.src path
+                , Html.Styled.Attributes.alt <| item.titleEn ++ " " ++ String.fromInt index
                 ]
                 []
             ]
         ]
 
 
-productList : Session -> Int -> Item -> Html Msg
+productList : Session -> Int -> Item -> Html.Styled.Html msg
 productList { language } index item =
-    div [ class "product" ]
-        [ h2 [] [ text <| getName language item ]
-        , div [ class "grid" ]
+    Html.Styled.div [ Html.Styled.Attributes.class "product" ]
+        [ Html.Styled.h2 [] [ Html.Styled.text <| getName language item ]
+        , Html.Styled.div [ Html.Styled.Attributes.class "grid" ]
             (item.galleryImages |> List.map (productButton index item))
         ]
 
 
-languageButton : Language -> Language -> Html Msg
+languageButton : Language -> Language -> Html.Styled.Html Msg
 languageButton language selectedLanguage =
-    let
-        languageString =
-            language |> Language.toString |> String.toLower
-    in
-    Button.small
-        (ToggledLanguage language)
-        (language == selectedLanguage)
-        [ img [ alt <| languageString ++ " flag", src <| "/assets/images/" ++ languageString ++ ".svg" ] [] ]
+    Html.Styled.button
+        [ Html.Styled.Attributes.class <| "button small"
+        , Html.Styled.Attributes.classList [ ( "selected", language == selectedLanguage ) ]
+        , Html.Styled.Attributes.disabled (language == selectedLanguage)
+        , Html.Styled.Events.onClick (ToggledLanguage language)
+        ]
+        [ Html.Styled.img
+            ((language |> Language.toString |> String.toLower)
+                |> (\a ->
+                        [ Html.Styled.Attributes.alt <| a ++ " flag"
+                        , Html.Styled.Attributes.src <| "/assets/images/" ++ a ++ ".svg"
+                        ]
+                   )
+            )
+            []
+        ]
 
 
-languageButtons : Language -> Html Msg
+languageButtons : Language -> Html.Styled.Html Msg
 languageButtons language =
-    div [ class "language-buttons" ]
+    Html.Styled.div [ Html.Styled.Attributes.class "language-buttons" ]
         [ languageButton Language.EN language
         , languageButton Language.ET language
         ]
 
 
-externalLinks : Session -> Html msg
+externalLinks : Session -> Html.Styled.Html msg
 externalLinks session =
-    div [ class "external-links" ]
-        [ Button.link [ "facebook" ]
-            (t session .links_facebook)
-            [ img [ alt "links.facebook", src "/assets/images/facebook.svg" ] [] ]
-        , Button.link [ "etsy" ]
-            (t session .links_etsy)
-            [ img [ alt "links.etsy", src "/assets/images/etsy.svg" ] [] ]
-        , Button.link [ "instagram" ]
-            (t session .links_instagram)
-            [ img [ alt "link.instagram", src "/assets/images/instagram.svg" ] [] ]
+    let
+        link : { className : String, url : String } -> List (Html.Styled.Html msg) -> Html.Styled.Html msg
+        link { className, url } =
+            Html.Styled.a
+                [ Html.Styled.Attributes.class <| "button default " ++ className
+                , Html.Styled.Attributes.href url
+                ]
+    in
+    Html.Styled.div [ Html.Styled.Attributes.class "external-links" ]
+        [ link { className = "facebook", url = t session .links_facebook }
+            [ Html.Styled.img
+                [ Html.Styled.Attributes.alt "links.facebook"
+                , Html.Styled.Attributes.src "/assets/images/facebook.svg"
+                ]
+                []
+            ]
+        , link { className = "etsy", url = t session .links_etsy }
+            [ Html.Styled.img
+                [ Html.Styled.Attributes.alt "links.etsy"
+                , Html.Styled.Attributes.src "/assets/images/etsy.svg"
+                ]
+                []
+            ]
+        , link { className = "instagram", url = t session .links_instagram }
+            [ Html.Styled.img
+                [ Html.Styled.Attributes.alt "link.instagram"
+                , Html.Styled.Attributes.src "/assets/images/instagram.svg"
+                ]
+                []
+            ]
         ]
 
 
-contactInformation : Session -> Html msg
+contactInformation : Session -> Html.Styled.Html msg
 contactInformation session =
-    div [ class "contact-information" ]
-        [ div [ class "avatar" ] [ img [ alt "avatar", src "/assets/images/avatar.jpg" ] [] ]
-        , div []
-            [ text <| t session .contact_name
-            , div []
-                [ text <| t session .phone ++ ": "
-                , Html.a [ class "link link--dark", href <| "tel:" ++ t session .phonenumber ]
-                    [ text <| t session .phonenumber ]
+    Html.Styled.div [ Html.Styled.Attributes.class "contact-information" ]
+        [ Html.Styled.div [ Html.Styled.Attributes.class "avatar" ]
+            [ Html.Styled.img
+                [ Html.Styled.Attributes.alt "avatar"
+                , Html.Styled.Attributes.src "/assets/images/avatar.jpg"
                 ]
-            , div []
-                [ text <| t session .email ++ ": "
-                , Html.a
-                    [ class "link link--dark", href <| "mailto:" ++ t session .email_address ]
-                    [ text <| t session .email_address ]
+                []
+            ]
+        , Html.Styled.div []
+            [ Html.Styled.text <| t session .contact_name
+            , Html.Styled.div []
+                [ Html.Styled.text <| t session .phone ++ ": "
+                , Html.Styled.a
+                    [ Html.Styled.Attributes.class "link link--dark"
+                    , Html.Styled.Attributes.href <| "tel:" ++ t session .phonenumber
+                    ]
+                    [ Html.Styled.text <| t session .phonenumber ]
+                ]
+            , Html.Styled.div []
+                [ Html.Styled.text <| t session .email ++ ": "
+                , Html.Styled.a
+                    [ Html.Styled.Attributes.class "link link--dark", Html.Styled.Attributes.href <| "mailto:" ++ t session .email_address ]
+                    [ Html.Styled.text <| t session .email_address ]
                 ]
             ]
         ]
 
 
-headerView : Session -> Html Msg
+headerView : Session -> Html.Styled.Html Msg
 headerView ({ language } as session) =
-    Html.header [ class "header container" ]
-        [ div [ class "logo-section" ] [ Logo.image, languageButtons language ]
-        , h3 [] [ text <| t session .header_slogan ]
+    Html.Styled.header [ Html.Styled.Attributes.class "header", Html.Styled.Attributes.css containerStyles ]
+        [ Html.Styled.div [ Html.Styled.Attributes.class "logo-section" ]
+            [ Svg.Styled.fromUnstyled Logo.image, languageButtons language ]
+        , Html.Styled.h3 [] [ Html.Styled.text <| t session .header_slogan ]
         , contactInformation session
         , externalLinks session
         ]
 
 
-view : Session -> List (Html Msg)
+view : Session -> List (Html.Html Msg)
 view session =
     [ headerView session
-    , section [ class "container products" ]
+    , Html.Styled.section
+        [ Html.Styled.Attributes.css
+            (Css.paddingBottom (Css.rem 2.25) :: containerStyles)
+        ]
         (intro session
             :: (List.sortBy .priority Items.all |> List.indexedMap (productList session))
         )
+    ]
+        |> List.map Html.Styled.toUnstyled
+
+
+
+-- STYLE
+
+
+containerStyles : List Css.Style
+containerStyles =
+    [ Css.paddingLeft (Css.px 15)
+    , Css.paddingRight (Css.px 15)
+    , Css.marginLeft Css.auto
+    , Css.marginRight Css.auto
+    , Css.Media.withMedia
+        [ Css.Media.all [ Css.Media.minWidth (Css.px 1200) ] ]
+        [ Css.maxWidth (Css.px 1140) ]
+    , Css.Media.withMedia
+        [ Css.Media.all [ Css.Media.minWidth (Css.px 768) ] ]
+        [ Css.maxWidth (Css.px 720) ]
+    , Css.Media.withMedia
+        [ Css.Media.all [ Css.Media.minWidth (Css.px 992) ] ]
+        [ Css.maxWidth (Css.px 960) ]
+    , Css.Media.withMedia
+        [ Css.Media.all [ Css.Media.minWidth (Css.px 576) ] ]
+        [ Css.maxWidth (Css.px 540) ]
     ]
 
 
@@ -146,15 +219,9 @@ view session =
 
 
 type Msg
-    = ClickedChangeRoute Route
-    | ToggledLanguage Language
+    = ToggledLanguage Language
 
 
 update : Msg -> Session -> ( Session, Cmd msg )
-update msg session =
-    case msg of
-        ClickedChangeRoute route ->
-            ( session, Route.pushUrl session.navKey route )
-
-        ToggledLanguage language ->
-            ( { session | language = language }, Cmd.none )
+update (ToggledLanguage language) session =
+    ( { session | language = language }, Cmd.none )

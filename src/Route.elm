@@ -3,6 +3,8 @@ module Route exposing (..)
 import Browser.Navigation as Nav
 import Html
 import Html.Attributes
+import Html.Styled
+import Html.Styled.Attributes
 import Url exposing (Url)
 import Url.Parser exposing ((</>))
 
@@ -31,6 +33,11 @@ parser =
 href : Route -> Html.Attribute msg
 href targetRoute =
     Html.Attributes.href (routeToString targetRoute)
+
+
+styledHref : Route -> Html.Styled.Attribute msg
+styledHref targetRoute =
+    Html.Styled.Attributes.href (routeToString targetRoute)
 
 
 replaceUrl : Nav.Key -> Route -> Cmd msg

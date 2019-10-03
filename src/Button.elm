@@ -1,8 +1,15 @@
 module Button exposing (default, link, maxSize, small)
 
 import Html exposing (Html, a, button)
-import Html.Attributes exposing (class, classList, disabled, href, src)
-import Utilities exposing (onClickWithPreventDefault)
+import Html.Attributes exposing (class, classList, disabled, href)
+import Html.Events
+import Json.Decode
+
+
+onClickWithPreventDefault : msg -> Html.Attribute msg
+onClickWithPreventDefault message =
+    Html.Events.preventDefaultOn "click"
+        (Json.Decode.succeed message |> Json.Decode.map (\msg -> ( msg, True )))
 
 
 internalButton : List String -> msg -> Bool -> List (Html msg) -> Html msg

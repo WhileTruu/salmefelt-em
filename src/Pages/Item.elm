@@ -1,12 +1,12 @@
 module Pages.Item exposing (Model, Msg, toSession, update, view)
 
 import Button
-import Header.View
-import Html exposing (Html, div, h2, img, section, text)
+import Html exposing (Html, div, h2, header, img, section, text)
 import Html.Attributes exposing (alt, class, src)
 import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
+import Logo
 import Route exposing (Route)
 import Session exposing (Session)
 
@@ -66,11 +66,11 @@ imageView model item =
 
 view : Model -> List (Html Msg)
 view model =
-    [ Header.View.view (toSession model)
+    [ headerView
     , section [ class "container product-view" ]
         (Items.all
             |> List.indexedMap Tuple.pair
-            |> List.filter (Tuple.first >> (==) 0)
+            |> List.filter (Tuple.first >> (==) model.index)
             |> List.head
             |> Maybe.map Tuple.second
             |> Maybe.map (\item -> [ imageView model item, descriptionView model item ])
@@ -91,6 +91,14 @@ descriptionView model item =
         |> (\{ name, description } -> div [ class "section" ] [ h2 [] [ text name ], text description ])
 
 
+headerView : Html msg
+headerView =
+    header [ class "header container compact" ]
+        [ div [ class "logo-section compact" ]
+            [ Html.a [ Route.href Route.Home ] [ Logo.image ] ]
+        ]
+
+
 
 -- UPDATE
 
@@ -101,4 +109,4 @@ type Msg
 
 update : Msg -> Model -> Cmd msg
 update (ClickedChangeRoute route) model =
-    Route.pushUrl (toSession model).navKey route
+    Route.replaceUrl (toSession model).navKey route

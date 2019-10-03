@@ -125,9 +125,7 @@ update msg model =
             changeRouteTo (Route.fromUrl url) model
 
         ( GotHomeMsg subMsg, Home session ) ->
-            Home.update subMsg session
-                |> Cmd.map GotHomeMsg
-                |> Tuple.pair model
+            Home.update subMsg session |> Tuple.mapBoth Home (Cmd.map GotHomeMsg)
 
         ( GotItemMsg subMsg, Item pageModel ) ->
             Item.update subMsg pageModel

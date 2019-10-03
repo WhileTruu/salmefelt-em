@@ -21,7 +21,7 @@ type Model
     = Redirect Session
     | NotFound Session
     | Home Session
-    | Item Session Int Int
+    | Item Item.Model
 
 
 init : Json.Decode.Value -> Url -> Nav.Key -> ( Model, Cmd Msg )
@@ -29,8 +29,7 @@ init flags url navKey =
     changeRouteTo (Route.fromUrl url)
         (Redirect
             (Session navKey
-                (flags
-                    |> Json.Decode.decodeValue Language.decode
+                (Json.Decode.decodeValue Language.decode flags
                     |> Result.withDefault Language.EN
                 )
             )
@@ -43,26 +42,20 @@ init flags url navKey =
 
 view : Model -> Browser.Document Msg
 view model =
-    case model of
-        Redirect session ->
-            { title = "Salmefelt"
-            , body = []
-            }
+    (case model of
+        Redirect _ ->
+            []
 
         Home session ->
-            { title = "Salmefelt"
-            , body = List.map (Html.map GotHomeMsg) (Home.view session)
-            }
+            List.map (Html.map GotHomeMsg) (Home.view session)
 
-        Item session index imageIndex ->
-            { title = "Salmefelt"
-            , body = List.map (Html.map GotItemMsg) (Item.view session index imageIndex)
-            }
+        Item pageModel ->
+            List.map (Html.map GotItemMsg) (Item.view pageModel)
 
         NotFound session ->
-            { title = "Salmefelt"
-            , body = List.map (Html.map GotItemMsg) (NotFound.view session)
-            }
+            List.map (Html.map GotItemMsg) (NotFound.view session)
+    )
+        |> (\a -> { title = "Salmefelt", body = a })
 
 
 
@@ -88,13 +81,14 @@ toSession model =
         Home session ->
             session
 
-        Item session _ _ ->
-            session
+        Item pageModel ->
+            Item.toSession pageModel
 
 
 changeRouteTo : Maybe Route -> Model -> ( Model, Cmd Msg )
 changeRouteTo maybeRoute model =
     let
+        session : Session
         session =
             toSession model
     in
@@ -103,7 +97,7 @@ changeRouteTo maybeRoute model =
             ( NotFound session, Cmd.none )
 
         Just (Route.Item itemIndex imageIndex) ->
-            ( Item session itemIndex imageIndex, Cmd.none )
+            ( Item <| Item.Model session itemIndex imageIndex, Cmd.none )
 
         Just Route.Home ->
             ( Home session, Cmd.none )
@@ -129,6 +123,16 @@ update msg model =
 
         ( ChangedUrl url, _ ) ->
             changeRouteTo (Route.fromUrl url) model
+
+        ( GotHomeMsg subMsg, Home session ) ->
+            Home.update subMsg session
+                |> Cmd.map GotHomeMsg
+                |> Tuple.pair model
+
+        ( GotItemMsg subMsg, Item pageModel ) ->
+            Item.update subMsg pageModel
+                |> Cmd.map GotItemMsg
+                |> Tuple.pair model
 
         ( _, _ ) ->
             ( model, Cmd.none )

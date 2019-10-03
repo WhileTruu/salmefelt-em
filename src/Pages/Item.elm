@@ -1,4 +1,4 @@
-module Pages.Item exposing (Msg, update, view)
+module Pages.Item exposing (Model, Msg, toSession, update, view)
 
 import Button
 import Header.View
@@ -11,11 +11,31 @@ import Route exposing (Route)
 import Session exposing (Session)
 
 
-productImageButton : Int -> Int -> Int -> String -> Html Msg
-productImageButton index selectedImageIndex imageIndex imageSrc =
+
+-- MODEL
+
+
+type alias Model =
+    { session : Session
+    , index : Int
+    , imageIndex : Int
+    }
+
+
+toSession : Model -> Session
+toSession =
+    .session
+
+
+
+-- VIEW
+
+
+itemImageButton : Model -> Int -> String -> Html Msg
+itemImageButton model imageIndex imageSrc =
     Button.default
-        (ClickedChangeRoute (Route.Item index imageIndex))
-        (imageIndex == selectedImageIndex)
+        (ClickedChangeRoute (Route.Item model.index imageIndex))
+        (imageIndex == model.imageIndex)
         [ img
             [ src imageSrc
             , alt <| "button-image-" ++ String.fromInt imageIndex
@@ -24,15 +44,16 @@ productImageButton index selectedImageIndex imageIndex imageSrc =
         ]
 
 
-imageView : Int -> Int -> Item -> Html Msg
-imageView index imageIndex item =
+imageView : Model -> Item -> Html Msg
+imageView model item =
     div [ class "section" ]
-        [ div [ class "buttons" ] (item.galleryImages |> List.indexedMap (productImageButton index imageIndex))
+        [ div [ class "buttons" ]
+            (item.galleryImages |> List.indexedMap (itemImageButton model))
         , img
             [ src <|
                 (item.galleryImages
                     |> List.indexedMap Tuple.pair
-                    |> List.filter (Tuple.first >> (==) imageIndex)
+                    |> List.filter (Tuple.first >> (==) model.imageIndex)
                     |> List.head
                     |> Maybe.map Tuple.second
                     |> Maybe.withDefault ""
@@ -43,24 +64,24 @@ imageView index imageIndex item =
         ]
 
 
-view : Session -> Int -> Int -> List (Html Msg)
-view session index imageIndex =
-    [ Header.View.view session
+view : Model -> List (Html Msg)
+view model =
+    [ Header.View.view (toSession model)
     , section [ class "container product-view" ]
         (Items.all
             |> List.indexedMap Tuple.pair
             |> List.filter (Tuple.first >> (==) 0)
             |> List.head
             |> Maybe.map Tuple.second
-            |> Maybe.map (\item -> [ imageView index imageIndex item, descriptionView session item ])
+            |> Maybe.map (\item -> [ imageView model item, descriptionView model item ])
             |> Maybe.withDefault []
         )
     ]
 
 
-descriptionView : Session -> Item -> Html msg
-descriptionView session item =
-    (case session.language of
+descriptionView : Model -> Item -> Html msg
+descriptionView model item =
+    (case (toSession model).language of
         Language.EN ->
             { name = item.titleEn, description = item.bodyEn }
 
@@ -78,6 +99,6 @@ type Msg
     = ClickedChangeRoute Route
 
 
-update : Msg -> Session -> Cmd msg
-update (ClickedChangeRoute route) session =
-    Route.pushUrl session.navKey route
+update : Msg -> Model -> Cmd msg
+update (ClickedChangeRoute route) model =
+    Route.pushUrl (toSession model).navKey route

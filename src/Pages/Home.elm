@@ -8,6 +8,7 @@ import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
 import Logo
+import Ports
 import Route exposing (Route)
 import Session exposing (Session)
 import Style
@@ -298,4 +299,6 @@ type Msg
 
 update : Msg -> Session -> ( Session, Cmd msg )
 update (ToggledLanguage language) session =
-    ( { session | language = language }, Cmd.none )
+    ( { session | language = language }
+    , Ports.storeLanguage <| Language.toString language
+    )

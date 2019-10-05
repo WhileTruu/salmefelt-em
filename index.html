@@ -47,7 +47,7 @@
           rel="stylesheet"/>
     <style>
         body {
-            background: radial-gradient(circle at 45% 9%, #bff9db, #fff);
+            background: #e5fff1;
             font-family: "Nunito Sans", sans-serif;
             margin: 0;
             color: #293c4b;
@@ -61,7 +61,7 @@
 <body>
 <script>
     var app = Elm.Main.init({
-        language: window.localStorage.getItem("language")
+        flags: window.localStorage.getItem("language")
     })
 
     app.ports.storeLanguage.subscribe(function (language) {

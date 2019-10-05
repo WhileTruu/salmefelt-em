@@ -24,7 +24,7 @@ type alias Translations =
 
 english : Translations
 english =
-    { header_slogan = "modern felt products inspired by Estonian history"
+    { header_slogan = "modern felt handicraft inspired by Estonian history"
     , body_text =
         [ "Welcome to Salmefelt Ltd handicraft products page."
         , "My creations come from deep within my heart and carry my joy and feelings."

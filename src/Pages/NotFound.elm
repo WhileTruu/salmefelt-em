@@ -12,8 +12,6 @@ view session =
     [ HS.section [ Html.Styled.Attributes.css [ Style.container ] ]
         [ HS.h1 [] [ HS.text "404" ]
         , HS.p []
-            [ HS.text
-                (Translations.forLanguage session.language).page_not_found
-            ]
+            [ HS.text (Translations.forLanguage session.language).page_not_found ]
         ]
     ]

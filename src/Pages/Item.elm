@@ -1,14 +1,15 @@
-module Pages.Item exposing (Model, Msg, toSession, update, view)
+module Pages.Item exposing (Model, toSession, view)
 
-import Button
-import Html exposing (Html, div, h2, header, img, section, text)
-import Html.Attributes exposing (alt, class, src)
+import Css
+import Html.Styled as HS
+import Html.Styled.Attributes as HSA
 import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
 import Logo
 import Route exposing (Route)
 import Session exposing (Session)
+import Style
 
 
 
@@ -31,26 +32,39 @@ toSession =
 -- VIEW
 
 
-itemImageButton : Model -> Int -> String -> Html Msg
+itemImageButton : Model -> Int -> String -> HS.Html msg
 itemImageButton model imageIndex imageSrc =
-    Button.default
-        (ClickedChangeRoute (Route.Item model.index imageIndex))
-        (imageIndex == model.imageIndex)
-        [ img
-            [ src imageSrc
-            , alt <| "button-image-" ++ String.fromInt imageIndex
+    HS.a
+        [ HSA.css
+            [ Css.height (Css.rem 3)
+            , Style.button { isSelected = imageIndex == model.imageIndex }
+            , Style.buttonRounded
+            , Css.marginRight Style.spacingSmall
+            , Css.marginBottom Style.spacingSmall
+            ]
+        , Route.href (Route.Item model.index imageIndex)
+        ]
+        [ HS.img
+            [ HSA.src imageSrc
+            , HSA.css
+                [ Css.height (Css.pct 100)
+                , Css.maxHeight (Css.rem 3)
+                , Css.maxWidth (Css.rem 3)
+                , Css.borderRadius Style.buttonBorderRadius
+                ]
+            , HSA.alt <| "button-image-" ++ String.fromInt imageIndex
             ]
             []
         ]
 
 
-imageView : Model -> Item -> Html Msg
+imageView : Model -> Item -> HS.Html msg
 imageView model item =
-    div [ class "section" ]
-        [ div [ class "buttons" ]
+    HS.div []
+        [ HS.div []
             (item.galleryImages |> List.indexedMap (itemImageButton model))
-        , img
-            [ src <|
+        , HS.img
+            [ HSA.src <|
                 (item.galleryImages
                     |> List.indexedMap Tuple.pair
                     |> List.filter (Tuple.first >> (==) model.imageIndex)
@@ -58,16 +72,16 @@ imageView model item =
                     |> Maybe.map Tuple.second
                     |> Maybe.withDefault ""
                 )
-            , alt item.titleEn
+            , HSA.alt item.titleEn
             ]
             []
         ]
 
 
-view : Model -> List (Html Msg)
+view : Model -> List (HS.Html msg)
 view model =
     [ headerView
-    , section [ class "container product-view" ]
+    , HS.section [ HSA.css [ Style.container ] ]
         (Items.all
             |> List.indexedMap Tuple.pair
             |> List.filter (Tuple.first >> (==) model.index)
@@ -79,7 +93,7 @@ view model =
     ]
 
 
-descriptionView : Model -> Item -> Html msg
+descriptionView : Model -> Item -> HS.Html msg
 descriptionView model item =
     (case (toSession model).language of
         Language.EN ->
@@ -88,25 +102,22 @@ descriptionView model item =
         Language.ET ->
             { name = item.titleEt, description = item.bodyEt }
     )
-        |> (\{ name, description } -> div [ class "section" ] [ h2 [] [ text name ], text description ])
+        |> (\{ name, description } ->
+                HS.div []
+                    [ HS.h2 [] [ HS.text name ], HS.text description ]
+           )
 
 
-headerView : Html msg
+headerView : HS.Html msg
 headerView =
-    header [ class "header container compact" ]
-        [ div [ class "logo-section compact" ]
-            [ Html.a [ Route.href Route.Home ] [ Logo.image ] ]
+    HS.header
+        [ HSA.css
+            [ Css.marginTop Style.spacingLarge
+            , Css.marginBottom Style.spacingLarge
+            , Css.color Style.colorDark
+            , Style.container
+            ]
         ]
-
-
-
--- UPDATE
-
-
-type Msg
-    = ClickedChangeRoute Route
-
-
-update : Msg -> Model -> Cmd msg
-update (ClickedChangeRoute route) model =
-    Route.replaceUrl (toSession model).navKey route
+        [ HS.a [ Route.href Route.Home ]
+            [ Logo.image [ Css.height (Css.rem 1.6), Css.width (Css.rem 10) ] ]
+        ]

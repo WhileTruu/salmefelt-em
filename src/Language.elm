@@ -1,4 +1,4 @@
-module Language exposing (Language(..), decode, toString, toggle)
+module Language exposing (Language(..), decode, toString)
 
 import Json.Decode
 
@@ -6,16 +6,6 @@ import Json.Decode
 type Language
     = EN
     | ET
-
-
-toggle : Language -> Language
-toggle language =
-    case language of
-        EN ->
-            ET
-
-        ET ->
-            EN
 
 
 decode : Json.Decode.Decoder Language

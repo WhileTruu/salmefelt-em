@@ -1,15 +1,19 @@
 module Pages.NotFound exposing (view)
 
-import Html exposing (Html, h1, p, section, text)
-import Html.Attributes exposing (class)
+import Html.Styled as HS
+import Html.Styled.Attributes
 import Session exposing (Session)
+import Style
 import Translations exposing (Translations)
 
 
-view : Session -> List (Html msg)
+view : Session -> List (HS.Html msg)
 view session =
-    [ section [ class "container" ]
-        [ h1 [] [ text "404" ]
-        , p [] [ text (Translations.forLanguage session.language).page_not_found ]
+    [ HS.section [ Html.Styled.Attributes.css [ Style.container ] ]
+        [ HS.h1 [] [ HS.text "404" ]
+        , HS.p []
+            [ HS.text
+                (Translations.forLanguage session.language).page_not_found
+            ]
         ]
     ]

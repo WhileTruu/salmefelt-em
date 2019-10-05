@@ -1,8 +1,6 @@
 module Route exposing (..)
 
 import Browser.Navigation as Nav
-import Html
-import Html.Attributes
 import Html.Styled
 import Html.Styled.Attributes
 import Url exposing (Url)
@@ -30,24 +28,14 @@ parser =
 -- PUBLIC HELPERS
 
 
-href : Route -> Html.Attribute msg
+href : Route -> Html.Styled.Attribute msg
 href targetRoute =
-    Html.Attributes.href (routeToString targetRoute)
-
-
-styledHref : Route -> Html.Styled.Attribute msg
-styledHref targetRoute =
     Html.Styled.Attributes.href (routeToString targetRoute)
 
 
 replaceUrl : Nav.Key -> Route -> Cmd msg
 replaceUrl key route =
     Nav.replaceUrl key (routeToString route)
-
-
-pushUrl : Nav.Key -> Route -> Cmd msg
-pushUrl key route =
-    Nav.pushUrl key (routeToString route)
 
 
 fromUrl : Url -> Maybe Route

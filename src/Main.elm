@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (Html)
+import Html.Styled
 import Json.Decode
 import Language as Language exposing (Language)
 import Pages.Home as Home
@@ -47,15 +47,19 @@ view model =
             []
 
         Home session ->
-            List.map (Html.map GotHomeMsg) (Home.view session)
+            List.map (Html.Styled.map GotHomeMsg) (Home.view session)
 
         Item pageModel ->
-            List.map (Html.map GotItemMsg) (Item.view pageModel)
+            Item.view pageModel
 
         NotFound session ->
-            List.map (Html.map GotItemMsg) (NotFound.view session)
+            NotFound.view session
     )
-        |> (\a -> { title = "Salmefelt", body = a })
+        |> (\a ->
+                { title = "Salmefelt"
+                , body = a |> List.map Html.Styled.toUnstyled
+                }
+           )
 
 
 
@@ -63,8 +67,7 @@ view model =
 
 
 type Msg
-    = GotItemMsg Item.Msg
-    | GotHomeMsg Home.Msg
+    = GotHomeMsg Home.Msg
     | ChangedUrl Url
     | ClickedLink Browser.UrlRequest
 
@@ -126,11 +129,6 @@ update msg model =
 
         ( GotHomeMsg subMsg, Home session ) ->
             Home.update subMsg session |> Tuple.mapBoth Home (Cmd.map GotHomeMsg)
-
-        ( GotItemMsg subMsg, Item pageModel ) ->
-            Item.update subMsg pageModel
-                |> Cmd.map GotItemMsg
-                |> Tuple.pair model
 
         ( _, _ ) ->
             ( model, Cmd.none )

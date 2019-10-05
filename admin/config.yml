@@ -35,6 +35,8 @@ collections:
         field: {label: "Image", name: "image", widget: "image"}
   - label: "Translations"
     name: "translations"
+    editor:
+      preview: false
     files:
       - label: "English"
         name: "english"

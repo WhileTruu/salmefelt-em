@@ -15,9 +15,6 @@ type alias Translations =
     , address_translation : String
     , address : List String
     , company_name : String
-    , links_facebook : String
-    , links_etsy : String
-    , links_instagram : String
     , page_not_found : String
     }
 
@@ -38,9 +35,6 @@ english =
     , address_translation = "address"
     , address = [ "Aia 4, Salme alev, 93201", "Saaremaa, Estonia" ]
     , company_name = "Salmefelt Ltd"
-    , links_facebook = "https://www.facebook.com/salmefelt"
-    , links_etsy = "https://www.etsy.com/shop/salmefelt"
-    , links_instagram = "https://www.instagram.com/salmefelt"
     , page_not_found = "This page does not exist. 😞"
     }
 
@@ -61,9 +55,6 @@ estonian =
     , address_translation = "aadress"
     , address = [ "Aia 4, Salme alev, 93201", "Saaremaa, Estonia" ]
     , company_name = "Salmefelt OÜ"
-    , links_facebook = "https://www.facebook.com/salmefelt"
-    , links_etsy = "https://www.etsy.com/shop/salmefelt"
-    , links_instagram = "https://www.instagram.com/salmefelt"
     , page_not_found = "Seda lehte pole olemas. 😞"
     }
 

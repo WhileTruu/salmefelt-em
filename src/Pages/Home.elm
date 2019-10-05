@@ -15,6 +15,21 @@ import Style
 import Translations exposing (Translations)
 
 
+facebookUrl : String
+facebookUrl =
+    "https://www.facebook.com/salmefelt"
+
+
+etsyUrl : String
+etsyUrl =
+    "https://www.etsy.com/shop/salmefelt"
+
+
+instagramUrl : String
+instagramUrl =
+    "https://www.instagram.com/salmefelt"
+
+
 
 -- VIEW
 
@@ -121,8 +136,8 @@ languageButtons language =
         ]
 
 
-facebookHyperlink : Session -> HS.Html msg
-facebookHyperlink session =
+facebookHyperlink : HS.Html msg
+facebookHyperlink =
     HS.a
         [ HSA.css
             [ Css.height Style.buttonHeight
@@ -132,7 +147,7 @@ facebookHyperlink session =
             , Style.button { isSelected = False }
             , Style.roundedButton
             ]
-        , HSA.href <| t session .links_facebook
+        , HSA.href facebookUrl
         ]
         [ HS.img
             [ HSA.css [ Css.height Style.buttonHeight ]
@@ -143,8 +158,8 @@ facebookHyperlink session =
         ]
 
 
-etsyHyperlink : Session -> HS.Html msg
-etsyHyperlink session =
+etsyHyperlink : HS.Html msg
+etsyHyperlink =
     HS.a
         [ HSA.css
             [ Css.height Style.buttonHeight
@@ -154,7 +169,7 @@ etsyHyperlink session =
             , Style.button { isSelected = False }
             , Style.roundedButton
             ]
-        , HSA.href <| t session .links_etsy
+        , HSA.href etsyUrl
         ]
         [ HS.img
             [ HSA.css
@@ -168,8 +183,8 @@ etsyHyperlink session =
         ]
 
 
-instagramHyperlink : Session -> HS.Html msg
-instagramHyperlink session =
+instagramHyperlink : HS.Html msg
+instagramHyperlink =
     HS.a
         [ HSA.css
             [ Css.height Style.buttonHeight
@@ -189,7 +204,7 @@ instagramHyperlink session =
             , Style.button { isSelected = False }
             , Style.roundedButton
             ]
-        , HSA.href <| t session .links_instagram
+        , HSA.href instagramUrl
         ]
         [ HS.img
             [ HSA.css [ Css.padding (Css.rem 0.25), Css.height (Css.rem 2.5) ]
@@ -268,14 +283,12 @@ headerView ({ language } as session) =
                 , Css.flexWrap Css.wrapReverse
                 ]
             ]
-            [ Logo.image []
-            , languageButtons language
-            ]
+            [ Logo.image [], languageButtons language ]
         , HS.h3 [] [ HS.text <| t session .header_slogan ]
         , contactInformation session
-        , facebookHyperlink session
-        , etsyHyperlink session
-        , instagramHyperlink session
+        , facebookHyperlink
+        , etsyHyperlink
+        , instagramHyperlink
         ]
 
 

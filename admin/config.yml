@@ -55,9 +55,6 @@ collections:
           - { label: "address_translation", name: "address_translation", widget: string }
           - { label: "address", name: "address", widget: list }
           - { label: "company_name", name: "company_name", widget: string }
-          - { label: "links_facebook", name: "links_facebook", widget: string }
-          - { label: "links_etsy", name: "links_etsy", widget: string }
-          - { label: "links_instagram", name: "links_instagram", widget: string }
           - { label: "page_not_found", name: "page_not_found", widget: string }
       - label: "Estonian"
         name: "estonian"
@@ -76,8 +73,5 @@ collections:
           - { label: "address_translation", name: "address_translation", widget: string }
           - { label: "address", name: "address", widget: list }
           - { label: "company_name", name: "company_name", widget: string }
-          - { label: "links_facebook", name: "links_facebook", widget: string }
-          - { label: "links_etsy", name: "links_etsy", widget: string }
-          - { label: "links_instagram", name: "links_instagram", widget: string }
           - { label: "page_not_found", name: "page_not_found", widget: string }
 

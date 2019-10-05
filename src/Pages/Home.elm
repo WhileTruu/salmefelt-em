@@ -191,16 +191,16 @@ instagramHyperlink =
             , Css.padding Css.zero
             , Css.property "background"
                 """
-                       radial-gradient(
-                         circle farthest-corner at 32% 106%,
-                         rgb(255, 225, 125) 0%,
-                         rgb(255, 205, 105) 10%,
-                         rgb(250, 145, 55) 28%,
-                         rgb(235, 65, 65) 42%,
-                         transparent 82%
-                       ),
-                       linear-gradient(135deg, rgb(35, 75, 215) 12%, rgb(195, 60, 190) 58%)
-                       """
+                radial-gradient(
+                  circle farthest-corner at 32% 106%,
+                  rgb(255, 225, 125) 0%,
+                  rgb(255, 205, 105) 10%,
+                  rgb(250, 145, 55) 28%,
+                  rgb(235, 65, 65) 42%,
+                  transparent 82%
+                ),
+                linear-gradient(135deg, rgb(35, 75, 215) 12%, rgb(195, 60, 190) 58%)
+                """
             , Style.button { isSelected = False }
             , Style.roundedButton
             ]

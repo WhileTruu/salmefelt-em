@@ -50,7 +50,7 @@ view model =
             List.map (Html.Styled.map GotHomeMsg) (Home.view session)
 
         Item pageModel ->
-            Item.view pageModel
+            List.map (Html.Styled.map GotItemMsg) (Item.view pageModel)
 
         NotFound session ->
             NotFound.view session
@@ -68,6 +68,7 @@ view model =
 
 type Msg
     = GotHomeMsg Home.Msg
+    | GotItemMsg Item.Msg
     | ChangedUrl Url
     | ClickedLink Browser.UrlRequest
 
@@ -129,6 +130,9 @@ update msg model =
 
         ( GotHomeMsg subMsg, Home session ) ->
             Home.update subMsg session |> Tuple.mapBoth Home (Cmd.map GotHomeMsg)
+
+        ( GotItemMsg subMsg, Item pageModel ) ->
+            Item.update subMsg pageModel |> Cmd.map GotItemMsg |> Tuple.pair model
 
         ( _, _ ) ->
             ( model, Cmd.none )

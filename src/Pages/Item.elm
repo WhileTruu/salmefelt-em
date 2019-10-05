@@ -1,8 +1,9 @@
-module Pages.Item exposing (Model, toSession, view)
+module Pages.Item exposing (Model, Msg, toSession, update, view)
 
 import Css
 import Html.Styled as HS
 import Html.Styled.Attributes as HSA
+import Html.Styled.Events as HSE
 import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
@@ -32,9 +33,9 @@ toSession =
 -- VIEW
 
 
-itemImageButton : Model -> Int -> String -> HS.Html msg
+itemImageButton : Model -> Int -> String -> HS.Html Msg
 itemImageButton model imageIndex imageSrc =
-    HS.a
+    HS.button
         [ HSA.css
             [ Css.height Style.buttonHeight
             , Style.button { isSelected = imageIndex == model.imageIndex }
@@ -42,7 +43,7 @@ itemImageButton model imageIndex imageSrc =
             , Css.marginRight Style.smallSpacing
             , Css.marginBottom Style.smallSpacing
             ]
-        , Route.href (Route.Item model.index imageIndex)
+        , HSE.onClick <| ClickedReplaceRoute (Route.Item model.index imageIndex)
         ]
         [ HS.img
             [ HSA.src imageSrc
@@ -58,7 +59,7 @@ itemImageButton model imageIndex imageSrc =
         ]
 
 
-imageView : Model -> Item -> HS.Html msg
+imageView : Model -> Item -> HS.Html Msg
 imageView model item =
     HS.div []
         [ HS.div []
@@ -78,7 +79,7 @@ imageView model item =
         ]
 
 
-view : Model -> List (HS.Html msg)
+view : Model -> List (HS.Html Msg)
 view model =
     [ headerView
     , HS.section [ HSA.css [ Style.container ] ]
@@ -121,3 +122,16 @@ headerView =
         [ HS.a [ Route.href Route.Home ]
             [ Logo.image [ Css.height (Css.rem 1.6), Css.width (Css.rem 10) ] ]
         ]
+
+
+
+-- UPDATE
+
+
+type Msg
+    = ClickedReplaceRoute Route
+
+
+update : Msg -> Model -> Cmd msg
+update (ClickedReplaceRoute route) { session } =
+    Route.replaceUrl session.navKey route

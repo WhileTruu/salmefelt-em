@@ -9,18 +9,18 @@ import Css.Transitions
 -- CONSTANTS
 
 
-spacingSmall : Css.Rem
-spacingSmall =
+smallSpacing : Css.Rem
+smallSpacing =
     Css.rem 0.8
 
 
-spacingMedium : Css.Rem
-spacingMedium =
+mediumSpacing : Css.Rem
+mediumSpacing =
     Css.rem 1
 
 
-spacingLarge : Css.Rem
-spacingLarge =
+largeSpacing : Css.Rem
+largeSpacing =
     Css.rem 2.5
 
 
@@ -34,18 +34,13 @@ buttonBorderRadius =
     Css.rem 0.5
 
 
-colorLinkLight : Css.Color
-colorLinkLight =
-    Css.hex "#fcffa9"
-
-
-colorLinkDark : Css.Color
-colorLinkDark =
+linkColor : Css.Color
+linkColor =
     Css.hex "#c400de"
 
 
-colorDark : Css.Color
-colorDark =
+darkColor : Css.Color
+darkColor =
     Css.hex "#293c4b"
 
 
@@ -73,8 +68,8 @@ textShadow =
 -- COMPONENTS
 
 
-buttonRounded : Css.Style
-buttonRounded =
+roundedButton : Css.Style
+roundedButton =
     Css.batch
         [ Css.borderRadius buttonBorderRadius
         , Css.after [ Css.borderRadius buttonBorderRadius ]
@@ -129,8 +124,8 @@ button { isSelected } =
 container : Css.Style
 container =
     Css.batch
-        [ Css.paddingLeft spacingMedium
-        , Css.paddingRight spacingMedium
+        [ Css.paddingLeft mediumSpacing
+        , Css.paddingRight mediumSpacing
         , Css.marginLeft Css.auto
         , Css.marginRight Css.auto
         , Css.Media.withMedia
@@ -182,7 +177,4 @@ gridItem =
 
 hyperlink : Css.Style
 hyperlink =
-    Css.batch
-        [ Css.color (Css.hex "#c400de")
-        , Css.textDecoration Css.none
-        ]
+    Css.batch [ Css.color linkColor, Css.textDecoration Css.none ]

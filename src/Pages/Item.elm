@@ -36,11 +36,11 @@ itemImageButton : Model -> Int -> String -> HS.Html msg
 itemImageButton model imageIndex imageSrc =
     HS.a
         [ HSA.css
-            [ Css.height (Css.rem 3)
+            [ Css.height Style.buttonHeight
             , Style.button { isSelected = imageIndex == model.imageIndex }
-            , Style.buttonRounded
-            , Css.marginRight Style.spacingSmall
-            , Css.marginBottom Style.spacingSmall
+            , Style.roundedButton
+            , Css.marginRight Style.smallSpacing
+            , Css.marginBottom Style.smallSpacing
             ]
         , Route.href (Route.Item model.index imageIndex)
         ]
@@ -48,8 +48,8 @@ itemImageButton model imageIndex imageSrc =
             [ HSA.src imageSrc
             , HSA.css
                 [ Css.height (Css.pct 100)
-                , Css.maxHeight (Css.rem 3)
-                , Css.maxWidth (Css.rem 3)
+                , Css.maxHeight Style.buttonHeight
+                , Css.maxWidth Style.buttonHeight
                 , Css.borderRadius Style.buttonBorderRadius
                 ]
             , HSA.alt <| "button-image-" ++ String.fromInt imageIndex
@@ -112,9 +112,9 @@ headerView : HS.Html msg
 headerView =
     HS.header
         [ HSA.css
-            [ Css.marginTop Style.spacingLarge
-            , Css.marginBottom Style.spacingLarge
-            , Css.color Style.colorDark
+            [ Css.marginTop Style.largeSpacing
+            , Css.marginBottom Style.largeSpacing
+            , Css.color Style.darkColor
             , Style.container
             ]
         ]

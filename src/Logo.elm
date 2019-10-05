@@ -13,7 +13,7 @@ image styles =
         , SvgAttrs.height "66.858002"
         , SvgAttrs.viewBox "0 0 107.42083 17.689514"
         , SvgAttrs.css
-            ([ Css.fill Style.colorDark
+            ([ Css.fill Style.darkColor
              , Css.overflow Css.visible
              ]
                 ++ styles

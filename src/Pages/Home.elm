@@ -25,7 +25,7 @@ t session translate =
 
 intro : Session -> HS.Html msg
 intro session =
-    HS.p [ HSA.css [ Css.paddingBottom Style.spacingLarge ] ]
+    HS.p [ HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
         (t session .body_text |> List.map HS.text |> List.intersperse (HS.br [] []))
 
 
@@ -46,7 +46,7 @@ itemHyperlink index item path =
         , HSA.css
             [ Style.gridItem
             , Style.button { isSelected = False }
-            , Style.buttonRounded
+            , Style.roundedButton
             ]
         ]
         [ HS.div
@@ -89,7 +89,7 @@ languageButton language selectedLanguage =
         , HSE.onClick (ToggledLanguage language)
         , HSA.css
             [ Css.height (Css.rem 1.5)
-            , Css.marginLeft Style.spacingSmall
+            , Css.marginLeft Style.smallSpacing
             , Style.button { isSelected = language == selectedLanguage }
             ]
         ]
@@ -112,7 +112,7 @@ languageButtons language =
             [ Css.displayFlex
             , Css.flex (Css.num 1)
             , Css.justifyContent Css.flexEnd
-            , Css.marginBottom Style.spacingSmall
+            , Css.marginBottom Style.smallSpacing
             ]
         ]
         [ languageButton Language.EN language
@@ -124,17 +124,17 @@ facebookHyperlink : Session -> HS.Html msg
 facebookHyperlink session =
     HS.a
         [ HSA.css
-            [ Css.height (Css.rem 3)
+            [ Css.height Style.buttonHeight
             , Css.padding Css.zero
             , Css.backgroundColor <| Css.rgb 255 255 255
-            , Css.marginRight Style.spacingSmall
+            , Css.marginRight Style.smallSpacing
             , Style.button { isSelected = False }
-            , Style.buttonRounded
+            , Style.roundedButton
             ]
         , HSA.href <| t session .links_facebook
         ]
         [ HS.img
-            [ HSA.css [ Css.height (Css.rem 3) ]
+            [ HSA.css [ Css.height Style.buttonHeight ]
             , HSA.alt "links.facebook"
             , HSA.src "/assets/images/facebook.svg"
             ]
@@ -146,12 +146,12 @@ etsyHyperlink : Session -> HS.Html msg
 etsyHyperlink session =
     HS.a
         [ HSA.css
-            [ Css.height (Css.rem 3)
+            [ Css.height Style.buttonHeight
             , Css.padding Css.zero
             , Css.backgroundColor <| Css.rgb 255 255 255
-            , Css.marginRight Style.spacingSmall
+            , Css.marginRight Style.smallSpacing
             , Style.button { isSelected = False }
-            , Style.buttonRounded
+            , Style.roundedButton
             ]
         , HSA.href <| t session .links_etsy
         ]
@@ -171,7 +171,7 @@ instagramHyperlink : Session -> HS.Html msg
 instagramHyperlink session =
     HS.a
         [ HSA.css
-            [ Css.height (Css.rem 3)
+            [ Css.height Style.buttonHeight
             , Css.padding Css.zero
             , Css.property "background"
                 """
@@ -186,7 +186,7 @@ instagramHyperlink session =
                        linear-gradient(135deg, rgb(35, 75, 215) 12%, rgb(195, 60, 190) 58%)
                        """
             , Style.button { isSelected = False }
-            , Style.buttonRounded
+            , Style.roundedButton
             ]
         , HSA.href <| t session .links_instagram
         ]
@@ -204,7 +204,7 @@ contactInformation session =
     HS.div
         [ HSA.css
             [ Css.displayFlex
-            , Css.paddingBottom Style.spacingMedium
+            , Css.paddingBottom Style.mediumSpacing
             , Css.alignItems Css.center
             ]
         ]
@@ -212,7 +212,7 @@ contactInformation session =
             [ HSA.css
                 [ Css.maxHeight (Css.rem 4)
                 , Css.maxWidth (Css.rem 4)
-                , Css.paddingRight Style.spacingSmall
+                , Css.paddingRight Style.smallSpacing
                 ]
             ]
             [ HS.img
@@ -253,9 +253,9 @@ headerView : Session -> HS.Html Msg
 headerView ({ language } as session) =
     HS.header
         [ HSA.css
-            [ Css.paddingTop Style.spacingLarge
-            , Css.paddingBottom Style.spacingLarge
-            , Css.color Style.colorDark
+            [ Css.paddingTop Style.largeSpacing
+            , Css.paddingBottom Style.largeSpacing
+            , Css.color Style.darkColor
             , Css.position Css.relative
             , Style.container
             ]

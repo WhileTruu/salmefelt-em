@@ -12,7 +12,7 @@ import Ports
 import Route exposing (Route)
 import Session exposing (Session)
 import Style
-import Translations exposing (Translations)
+import Translations exposing (t)
 
 
 facebookUrl : String
@@ -34,15 +34,10 @@ instagramUrl =
 -- VIEW
 
 
-t : Session -> (Translations -> a) -> a
-t session translate =
-    translate <| Translations.forLanguage session.language
-
-
 intro : Session -> HS.Html msg
-intro session =
+intro { language } =
     HS.p [ HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
-        (t session .body_text |> List.map HS.text |> List.intersperse (HS.br [] []))
+        [ HS.text <| t language .homePageContent ]
 
 
 getName : Language -> Item -> String
@@ -216,7 +211,7 @@ instagramHyperlink =
 
 
 contactInformation : Session -> HS.Html msg
-contactInformation session =
+contactInformation { language } =
     HS.div
         [ HSA.css
             [ Css.displayFlex
@@ -244,22 +239,22 @@ contactInformation session =
                 []
             ]
         , HS.div []
-            [ HS.text <| t session .contact_name
+            [ HS.text <| t language .contactName
             , HS.div []
-                [ HS.text <| t session .phone ++ ": "
+                [ HS.text <| t language .phone ++ ": "
                 , HS.a
                     [ HSA.css [ Style.hyperlink ]
-                    , HSA.href <| "tel:" ++ t session .phonenumber
+                    , HSA.href <| "tel:" ++ t language .phoneNumber
                     ]
-                    [ HS.text <| t session .phonenumber ]
+                    [ HS.text <| t language .phoneNumber ]
                 ]
             , HS.div []
-                [ HS.text <| t session .email ++ ": "
+                [ HS.text <| t language .email ++ ": "
                 , HS.a
                     [ HSA.css [ Style.hyperlink ]
-                    , HSA.href <| "mailto:" ++ t session .email_address
+                    , HSA.href <| "mailto:" ++ t language .emailAddress
                     ]
-                    [ HS.text <| t session .email_address ]
+                    [ HS.text <| t language .emailAddress ]
                 ]
             ]
         ]
@@ -284,7 +279,7 @@ headerView ({ language } as session) =
                 ]
             ]
             [ Logo.image [], languageButtons language ]
-        , HS.h3 [] [ HS.text <| t session .header_slogan ]
+        , HS.h3 [] [ HS.text <| t language .slogan ]
         , contactInformation session
         , facebookHyperlink
         , etsyHyperlink

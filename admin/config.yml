@@ -44,34 +44,30 @@ collections:
         extension: json
         format: json
         fields:
-          - { label: "header_slogan", name: "header_slogan", widget: string }
-          - { label: "body_text", name: "body_text", widget: list }
+          - { label: "slogan", name: "slogan", widget: string }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
           - { label: "email", name: "email", widget: string }
-          - { label: "email_address", name: "email_address", widget: string }
+          - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }
-          - { label: "phonenumber", name: "phonenumber", widget: string }
+          - { label: "phone number", name: "phoneNumber", widget: string }
           - { label: "contact", name: "contact", widget: string }
-          - { label: "contact_name", name: "contact_name", widget: string }
-          - { label: "address_translation", name: "address_translation", widget: string }
-          - { label: "address", name: "address", widget: list }
-          - { label: "company_name", name: "company_name", widget: string }
-          - { label: "page_not_found", name: "page_not_found", widget: string }
+          - { label: "contact name", name: "contactName", widget: string }
+          - { label: "company name", name: "companyName", widget: string }
+          - { label: "page not found", name: "pageNotFound", widget: string }
       - label: "Estonian"
         name: "estonian"
         file: "static/estonian.json"
         extension: json
         format: json
         fields:
-          - { label: "header_slogan", name: "header_slogan", widget: string }
-          - { label: "body_text", name: "body_text", widget: list }
+          - { label: "slogan", name: "slogan", widget: string }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
           - { label: "email", name: "email", widget: string }
-          - { label: "email_address", name: "email_address", widget: string }
+          - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }
-          - { label: "phonenumber", name: "phonenumber", widget: string }
+          - { label: "phone number", name: "phoneNumber", widget: string }
           - { label: "contact", name: "contact", widget: string }
-          - { label: "contact_name", name: "contact_name", widget: string }
-          - { label: "address_translation", name: "address_translation", widget: string }
-          - { label: "address", name: "address", widget: list }
-          - { label: "company_name", name: "company_name", widget: string }
-          - { label: "page_not_found", name: "page_not_found", widget: string }
+          - { label: "contact name", name: "contactName", widget: string }
+          - { label: "company name", name: "companyName", widget: string }
+          - { label: "page not found", name: "pageNotFound", widget: string }
 

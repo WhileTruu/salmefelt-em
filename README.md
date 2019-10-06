@@ -89,9 +89,9 @@ https://gist.github.com/choonkeat/b9959168e15d813d9f8a84d0e2c9632a
 ```
 generate: src/Files.elm src/Templates.elm
 
-src/Files.elm: files-as-elm-methods.js $(shell find public)
-	node files-as-elm-methods.js public > src/Files.elm
+src/Files.elm: filesAsElmMethods.js $(shell find public)
+	node filesAsElmMethods.js public > src/Files.elm
 
-src/Templates.elm: item-json-files-as-elm-module.js $(shell find public)
-	node item-json-files-as-elm-module.js public > src/Templates.elm
+src/Templates.elm: itemJsonFilesAsElmModule.js $(shell find public)
+	node itemJsonFilesAsElmModule.js public > src/Templates.elm
 ```

@@ -1,61 +1,21 @@
-module Translations exposing (Translations, forLanguage)
+module Translations exposing (Translations, forLanguage, t)
 
 import Language as Language exposing (Language)
+import Translations.English as English
+import Translations.Estonian as Estonian
 
 
 type alias Translations =
-    { header_slogan : String
-    , body_text : List String
+    { slogan : String
+    , homePageContent : String
     , email : String
-    , email_address : String
+    , emailAddress : String
     , phone : String
-    , phonenumber : String
+    , phoneNumber : String
     , contact : String
-    , contact_name : String
-    , address_translation : String
-    , address : List String
-    , company_name : String
-    , page_not_found : String
-    }
-
-
-english : Translations
-english =
-    { header_slogan = "modern felt handicraft inspired by Estonian history"
-    , body_text =
-        [ "Welcome to Salmefelt Ltd handicraft products page."
-        , "My creations come from deep within my heart and carry my joy and feelings."
-        ]
-    , email = "e-mail"
-    , email_address = "salmefelt@gmail.com"
-    , phone = "phone"
-    , phonenumber = "+372 5345 2868"
-    , contact = "contact us"
-    , contact_name = "Taivi Truu"
-    , address_translation = "address"
-    , address = [ "Aia 4, Salme alev, 93201", "Saaremaa, Estonia" ]
-    , company_name = "Salmefelt Ltd"
-    , page_not_found = "This page does not exist. 😞"
-    }
-
-
-estonian : Translations
-estonian =
-    { header_slogan = "ajaloost inspireeritud modernsed viltesemed"
-    , body_text =
-        [ "Tere tulemast tutvuma Salmefelt OÜ käsitöötoodetega."
-        , "Minu looming tuleb sügavalt südamest ja kannab edasi mu rõõme ja tundeid."
-        ]
-    , email = "e-post"
-    , email_address = "salmefelt@gmail.com"
-    , phone = "telefon"
-    , phonenumber = "+372 5345 2868"
-    , contact = "kontakt"
-    , contact_name = "Taivi Truu"
-    , address_translation = "aadress"
-    , address = [ "Aia 4, Salme alev, 93201", "Saaremaa, Estonia" ]
-    , company_name = "Salmefelt OÜ"
-    , page_not_found = "Seda lehte pole olemas. 😞"
+    , contactName : String
+    , companyName : String
+    , pageNotFound : String
     }
 
 
@@ -63,7 +23,12 @@ forLanguage : Language -> Translations
 forLanguage language =
     case language of
         Language.ET ->
-            estonian
+            Estonian.translations
 
         Language.EN ->
-            english
+            English.translations
+
+
+t : Language -> (Translations -> a) -> a
+t language translate =
+    translate <| forLanguage language

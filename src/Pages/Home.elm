@@ -4,6 +4,7 @@ import Css
 import Html.Styled as HS
 import Html.Styled.Attributes as HSA
 import Html.Styled.Events as HSE
+import Images
 import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
@@ -104,15 +105,12 @@ languageButton language selectedLanguage =
             , Style.button { isSelected = language == selectedLanguage }
             ]
         ]
-        [ (language |> Language.toString |> String.toLower)
-            |> (\a ->
-                    HS.img
-                        [ HSA.css [ Css.height (Css.pct 100) ]
-                        , HSA.alt <| a ++ " flag"
-                        , HSA.src <| "/assets/images/" ++ a ++ ".svg"
-                        ]
-                        []
-               )
+        [ case language of
+            Language.EN ->
+                Images.en |> HS.fromUnstyled
+
+            Language.ET ->
+                Images.et |> HS.fromUnstyled
         ]
 
 
@@ -144,13 +142,7 @@ facebookHyperlink =
             ]
         , HSA.href facebookUrl
         ]
-        [ HS.img
-            [ HSA.css [ Css.height Style.buttonHeight ]
-            , HSA.alt "links.facebook"
-            , HSA.src "/assets/images/facebook.svg"
-            ]
-            []
-        ]
+        [ Images.facebook ]
 
 
 etsyHyperlink : HS.Html msg
@@ -166,16 +158,7 @@ etsyHyperlink =
             ]
         , HSA.href etsyUrl
         ]
-        [ HS.img
-            [ HSA.css
-                [ Css.padding4 (Css.rem 0.6) (Css.rem 0.5) (Css.rem 0.4) (Css.rem 0.5)
-                , Css.height (Css.rem 2)
-                ]
-            , HSA.alt "links.etsy"
-            , HSA.src "/assets/images/etsy.svg"
-            ]
-            []
-        ]
+        [ Images.etsy ]
 
 
 instagramHyperlink : HS.Html msg
@@ -201,13 +184,7 @@ instagramHyperlink =
             ]
         , HSA.href instagramUrl
         ]
-        [ HS.img
-            [ HSA.css [ Css.padding (Css.rem 0.25), Css.height (Css.rem 2.5) ]
-            , HSA.alt "links.instagram"
-            , HSA.src "/assets/images/instagram.svg"
-            ]
-            []
-        ]
+        [ Images.instagram ]
 
 
 contactInformation : Session -> HS.Html msg
@@ -234,7 +211,7 @@ contactInformation { language } =
                     , Style.textShadow
                     ]
                 , HSA.alt "avatar"
-                , HSA.src "/assets/images/avatar.jpg"
+                , HSA.src Images.avatarBase64
                 ]
                 []
             ]

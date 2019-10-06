@@ -1,0 +1,14 @@
+# Distribution
+build/
+src/Files.elm
+src/Items.elm
+src/Translations
+
+# elm-package generated files
+elm-stuff
+
+# Desktop Services Store on macOS
+.DS_Store
+
+# Editor config
+.idea

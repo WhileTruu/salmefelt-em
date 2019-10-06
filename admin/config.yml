@@ -1,0 +1,73 @@
+backend:
+  name: github
+  repo: WhileTruu/salmefelt-em
+  branch: master # Branch to update (optional; defaults to master)
+  site_domain: relaxed-allen-8fd40b.netlify.com
+
+publish_mode: editorial_workflow
+
+media_folder: "static/uploads" # Media files will be stored in the repo under images/uploads
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: "item" # Used in routes, e.g., /admin/collections/blog
+    identifier_field: "titleEn"
+    label: "Item" # Used in the UI
+    folder: "static/items" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    extension: json
+    format: json
+    slug: "{{slug}}-{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}"
+    fields: # The fields for each document, usually in front matter
+      - {label: "English title", name: "titleEn", widget: "string", required: true}
+      - {label: "Estonian title", name: "titleEt", widget: "string", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Priority", name: "priority", widget: "number", valueType: "int", default: 0, min: 0}
+      - {label: "English body", name: "bodyEn", widget: "markdown"}
+      - {label: "Estonian body", name: "bodyEt", widget: "markdown"}
+      - label: "Gallery"
+        name: "galleryImages"
+        widget: "list"
+        field: {label: "Image", name: "image", widget: "image"}
+  - label: "Translations"
+    name: "translations"
+    editor:
+      preview: false
+    files:
+      - label: "English"
+        name: "english"
+        file: "static/english.json"
+        extension: json
+        format: json
+        fields:
+          - { label: "slogan", name: "slogan", widget: string }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
+          - { label: "email", name: "email", widget: string }
+          - { label: "email address", name: "emailAddress", widget: string }
+          - { label: "phone", name: "phone", widget: string }
+          - { label: "phone number", name: "phoneNumber", widget: string }
+          - { label: "contact", name: "contact", widget: string }
+          - { label: "contact name", name: "contactName", widget: string }
+          - { label: "company name", name: "companyName", widget: string }
+          - { label: "page not found", name: "pageNotFound", widget: string }
+      - label: "Estonian"
+        name: "estonian"
+        file: "static/estonian.json"
+        extension: json
+        format: json
+        fields:
+          - { label: "slogan", name: "slogan", widget: string }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
+          - { label: "email", name: "email", widget: string }
+          - { label: "email address", name: "emailAddress", widget: string }
+          - { label: "phone", name: "phone", widget: string }
+          - { label: "phone number", name: "phoneNumber", widget: string }
+          - { label: "contact", name: "contact", widget: string }
+          - { label: "contact name", name: "contactName", widget: string }
+          - { label: "company name", name: "companyName", widget: string }
+          - { label: "page not found", name: "pageNotFound", widget: string }
+

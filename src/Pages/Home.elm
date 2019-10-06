@@ -50,10 +50,10 @@ getName language item =
             item.titleEt
 
 
-itemHyperlink : Int -> Item -> String -> HS.Html msg
-itemHyperlink index item path =
+itemHyperlink : Int -> Item -> Int -> String -> HS.Html msg
+itemHyperlink index item imageIndex path =
     HS.a
-        [ Route.href (Route.Item index 0)
+        [ Route.href (Route.Item index imageIndex)
         , HSA.css
             [ Style.gridItem
             , Style.button { isSelected = False }
@@ -84,12 +84,12 @@ itemHyperlink index item path =
         ]
 
 
-itemList : Session -> Int -> Item -> HS.Html msg
-itemList { language } index item =
+itemView : Session -> Int -> Item -> HS.Html msg
+itemView { language } index item =
     HS.div []
         [ HS.h2 [] [ HS.text <| getName language item ]
         , HS.div [ HSA.css [ Css.margin (Css.pct -1) ] ]
-            (item.galleryImages |> List.map (itemHyperlink index item))
+            (item.galleryImages |> List.indexedMap (itemHyperlink index item))
         ]
 
 
@@ -292,7 +292,11 @@ view session =
     [ headerView session
     , HS.section [ HSA.css [ Css.paddingBottom (Css.rem 2.25), Style.container ] ]
         (intro session
-            :: (List.sortBy .priority Items.all |> List.indexedMap (itemList session))
+            :: (Items.all
+                    |> List.indexedMap Tuple.pair
+                    |> List.sortBy (Tuple.second >> .priority)
+                    |> List.map (\( index, item ) -> itemView session index item)
+               )
         )
     ]
 

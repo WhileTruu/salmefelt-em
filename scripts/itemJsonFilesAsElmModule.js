@@ -26,7 +26,7 @@ function itemToElm({ functionName, content }) {
     `    , date = Time.millisToPosix ${Date.parse(content.date)}`,
     `    , priority = ${content.priority}`,
     `    , bodyEn = "${content.bodyEn}"`,
-    `    , bodyEt = "${content.bodyEn}"`,
+    `    , bodyEt = "${content.bodyEt}"`,
     `    , galleryImages =\n${galleryImagesToElmList(content.galleryImages)}`,
     `    }`
   ].join("\n");

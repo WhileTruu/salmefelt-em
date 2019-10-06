@@ -1,6 +1,7 @@
 module Pages.Item exposing (Model, Msg, toSession, update, view)
 
 import Css
+import Css.Media
 import Html.Styled as HS
 import Html.Styled.Attributes as HSA
 import Html.Styled.Events as HSE
@@ -61,7 +62,7 @@ itemImageButton model imageIndex imageSrc =
 
 imageView : Model -> Item -> HS.Html Msg
 imageView model item =
-    HS.div []
+    HS.div [ HSA.css [ itemSectionStyle ] ]
         [ HS.div []
             (item.galleryImages |> List.indexedMap (itemImageButton model))
         , HS.img
@@ -74,6 +75,7 @@ imageView model item =
                     |> Maybe.withDefault ""
                 )
             , HSA.alt item.titleEn
+            , HSA.css [ Css.maxWidth (Css.pct 100) ]
             ]
             []
         ]
@@ -82,7 +84,7 @@ imageView model item =
 view : Model -> List (HS.Html Msg)
 view model =
     [ headerView
-    , HS.section [ HSA.css [ Style.container ] ]
+    , HS.section [ HSA.css [ Style.container, Css.displayFlex ] ]
         (Items.all
             |> List.indexedMap Tuple.pair
             |> List.filter (Tuple.first >> (==) model.index)
@@ -104,9 +106,20 @@ descriptionView model item =
             { name = item.titleEt, description = item.bodyEt }
     )
         |> (\{ name, description } ->
-                HS.div []
+                HS.div [ HSA.css [ itemSectionStyle ] ]
                     [ HS.h2 [] [ HS.text name ], HS.text description ]
            )
+
+
+itemSectionStyle : Css.Style
+itemSectionStyle =
+    Css.Media.withMedia
+        [ Css.Media.all [ Css.Media.minWidth (Css.px 768) ] ]
+        [ Css.firstOfType [ Css.paddingRight (Css.rem 0.4) ]
+        , Css.lastOfType [ Css.paddingLeft (Css.rem 0.4) ]
+        , Css.maxWidth (Css.pct 50)
+        , Css.boxSizing Css.borderBox
+        ]
 
 
 headerView : HS.Html msg

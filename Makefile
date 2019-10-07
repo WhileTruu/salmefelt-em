@@ -41,8 +41,6 @@ build:
 	echo "Minified size: $$(cat $(min) | wc -c) bytes ($min)"
 	echo "Gzipped size:  $$(cat $(min) | gzip -c | wc -c) bytes"
 	rm $(js)
-	# OPTIMIZE IMAGES
-	make optimizeimages
 	# COPY FILES
 	cp index.html build/index.html
 	cp favicon.ico build/favicon.ico

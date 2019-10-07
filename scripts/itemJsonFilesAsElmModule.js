@@ -27,7 +27,14 @@ function itemToElm({ functionName, content }) {
     `    , priority = ${content.priority}`,
     `    , bodyEn = "${content.bodyEn}"`,
     `    , bodyEt = "${content.bodyEt}"`,
-    `    , galleryImages =\n${galleryImagesToElmList(content.galleryImages)}`,
+    `    , galleryImages =\n${galleryImagesToElmList(
+      content.galleryImages.map(s =>
+        s
+          .replace(/\/uploads\//g, "/images/")
+          .split(".")[0]
+          .concat(".webp")
+      )
+    )}`,
     `    }`
   ].join("\n");
 }

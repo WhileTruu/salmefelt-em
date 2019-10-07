@@ -1,4 +1,4 @@
-generate: src/Items.elm src/Translations/English.elm src/Translations/Estonian.elm
+generate: src/Items.elm src/Translations/English.elm src/Translations/Estonian.elm optimizeimages
 
 
 src/Items.elm: scripts/itemJsonFilesAsElmModule.js $(shell find static/items)
@@ -47,25 +47,17 @@ build:
 	cp index.html build/index.html
 	cp favicon.ico build/favicon.ico
 	cp manifest.json build/manifest.json
-	mkdir -p build/static/uploads
-	mkdir -p build/static/uploads_minimal
-	mkdir -p build/static/uploads_optimized
-	cp -r static/uploads/ build/static/uploads/
-	cp -r static/uploads_minimal/ build/static/uploads_minimal/
-	cp -r static/uploads_optimized/ build/static/uploads_optimized/
+	mkdir -p build/static/images
+	cp -r static/images/ build/static/images/
 
 
 .PHONY: optimizeimages
 optimizeimages:
-	mkdir -p static/uploads_minimal
+	mkdir -p static/images
 	cd static/uploads/;\
 	pwd;\
-	for i in *; do convert "$$i" -resize 300x300 -quality 60 "../uploads_minimal/$$i"; done
+	convert * -strip -interlace Plane -resize 800x800 -sampling-factor 4:2:0 -quality 85 -set filename:x %t "../images/%[filename:x].webp"
 
-	mkdir -p static/uploads_optimized
-	cd static/uploads/;\
-	pwd;\
-	for i in *; do convert "$$i" -resize 600x600 -quality 80 "../uploads_optimized/$$i"; done
 
 
 

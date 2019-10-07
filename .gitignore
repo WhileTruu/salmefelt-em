@@ -4,8 +4,7 @@ src/Files.elm
 src/Items.elm
 src/Translations
 main.js
-static/uploads_minimal
-static/uploads_optimized
+static/images
 
 # elm-package generated files
 elm-stuff

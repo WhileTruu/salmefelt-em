@@ -6,15 +6,15 @@
   "bodyEn": "Vildist nukud on valmistatud nõelviltimistehnikas lambavillast ja karvatraadist. Nukud sobivad kodu kaunistamiseks, nad on seisavad, istuvad ja riputatavad. Vildist nukkude mõõtmed on 5-6 cm.",
   "bodyEt": "The dolls are each with their own personality. They suit best as decoration items and are made either standing or sitting. The felt dolls measure about 5-6cm and they are made from sheep wool and chenille stem.",
   "galleryImages": [
-    "/static/uploads/IMG_0080.jpg",
-    "/static/uploads/IMG_5376.jpg",
-    "/static/uploads/IMG_5387.jpg",
-    "/static/uploads/IMG_5382_9wGBlHp.jpg",
-    "/static/uploads/IMG_5370.jpg",
-    "/static/uploads/IMG_5447.jpg",
-    "/static/uploads/IMG_5448.jpg",
-    "/static/uploads/IMG_0018.jpg",
-    "/static/uploads/IMG_0060.jpg",
-    "/static/uploads/IMG_0055.jpg"
+    "static/uploads/IMG_0080.jpg",
+    "static/uploads/IMG_5376.jpg",
+    "static/uploads/IMG_5387.jpg",
+    "static/uploads/IMG_5382_9wGBlHp.jpg",
+    "static/uploads/IMG_5370.jpg",
+    "static/uploads/IMG_5447.jpg",
+    "static/uploads/IMG_5448.jpg",
+    "static/uploads/IMG_0018.jpg",
+    "static/uploads/IMG_0060.jpg",
+    "static/uploads/IMG_0055.jpg"
   ]
 }

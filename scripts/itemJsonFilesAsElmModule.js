@@ -32,7 +32,7 @@ function itemToElm({ functionName, content }) {
         s
           .replace(/\/uploads\//g, "/images/")
           .split(".")[0]
-          .concat(".webp")
+          .concat(".jpg")
           .slice(1)
       )
     )}`,

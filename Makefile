@@ -54,7 +54,7 @@ optimizeimages:
 	mkdir -p static/images
 	cd static/uploads/;\
 	pwd;\
-	convert * -strip -interlace Plane -resize 800x800 -sampling-factor 4:2:0 -quality 85 -set filename:x %t "../images/%[filename:x].webp"
+	convert * -strip -interlace Plane -resize 800x800 -sampling-factor 4:2:0 -quality 85 -set filename:x %t "../images/%[filename:x].jpg"
 
 
 

@@ -39,25 +39,17 @@ itemImageButton model imageIndex imageSrc =
     HS.button
         [ HSA.css
             [ Css.height Style.buttonHeight
+            , Css.width Style.buttonHeight
             , Style.button { isSelected = imageIndex == model.imageIndex }
             , Style.roundedButton
             , Css.marginRight Style.smallSpacing
             , Css.marginBottom Style.smallSpacing
+            , Css.backgroundImage (Css.url imageSrc)
+            , Css.backgroundSize Css.cover
             ]
         , HSE.onClick <| ClickedReplaceRoute (Route.Item model.index imageIndex)
         ]
-        [ HS.img
-            [ HSA.src imageSrc
-            , HSA.css
-                [ Css.height (Css.pct 100)
-                , Css.maxHeight Style.buttonHeight
-                , Css.maxWidth Style.buttonHeight
-                , Css.borderRadius Style.buttonBorderRadius
-                ]
-            , HSA.alt <| "button-image-" ++ String.fromInt imageIndex
-            ]
-            []
-        ]
+        []
 
 
 imageView : Model -> Item -> HS.Html Msg
@@ -84,7 +76,13 @@ imageView model item =
 view : Model -> List (HS.Html Msg)
 view model =
     [ headerView
-    , HS.section [ HSA.css [ Style.container, Css.displayFlex ] ]
+    , HS.section
+        [ HSA.css
+            [ Style.container
+            , Css.displayFlex
+            , Css.flexWrap Css.wrap
+            ]
+        ]
         (Items.all
             |> List.indexedMap Tuple.pair
             |> List.filter (Tuple.first >> (==) model.index)

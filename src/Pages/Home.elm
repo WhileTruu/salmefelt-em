@@ -59,29 +59,25 @@ itemHyperlink index item imageIndex path =
             [ Style.gridItem
             , Style.button { isSelected = False }
             , Style.roundedButton
+            , Css.after
+                [ Css.property "content" "\"\""
+                , Css.display Css.block
+                , Css.paddingBottom (Css.pct 100)
+                ]
             ]
         ]
-        [ HS.div
-            [ HSA.css
-                [ Css.width <| Css.pct 100
-                , Css.paddingBottom <| Css.pct 100
-                , Css.position Css.relative
+        [ HS.img
+            [ HSA.src path
+            , HSA.alt <| item.titleEn ++ String.fromInt index
+            , HSA.css
+                [ Css.position Css.absolute
+                , Css.width <| Css.pct 100
+                , Css.height <| Css.pct 100
+                , Css.property "object-fit" "cover"
+                , Style.roundedButton
                 ]
             ]
-            [ HS.img
-                [ HSA.src path
-                , HSA.alt <| item.titleEn ++ " " ++ String.fromInt index
-                , HSA.css
-                    [ Css.position Css.absolute
-                    , Css.maxWidth <| Css.pct 100
-                    , Css.minHeight <| Css.pct 100
-                    , Css.left Css.zero
-                    , Css.property "object-fit" "cover"
-                    , Css.borderRadius Style.buttonBorderRadius
-                    ]
-                ]
-                []
-            ]
+            []
         ]
 
 

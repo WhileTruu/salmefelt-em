@@ -70,10 +70,7 @@ textShadow =
 
 roundedButton : Css.Style
 roundedButton =
-    Css.batch
-        [ Css.borderRadius buttonBorderRadius
-        , Css.after [ Css.borderRadius buttonBorderRadius ]
-        ]
+    Css.borderRadius buttonBorderRadius
 
 
 button : { isSelected : Bool } -> Css.Style
@@ -88,7 +85,7 @@ button { isSelected } =
          , defaultShadow
          , Css.Transitions.transition
             [ Css.Transitions.transform3 200 0 Css.Transitions.easeInOut ]
-         , Css.after
+         , Css.before
             [ Css.property "content" "\"\""
             , Css.position Css.absolute
             , Css.top <| Css.zero

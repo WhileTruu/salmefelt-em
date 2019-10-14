@@ -47,6 +47,7 @@ build:
 	cp manifest.json build/manifest.json
 	mkdir -p build/static/images
 	cp -r static/images/ build/static/images/
+	cp -r static/uploads/ build/static/uploads/
 
 
 .PHONY: optimizeimages

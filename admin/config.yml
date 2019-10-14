@@ -29,10 +29,10 @@ collections:
       - {label: "Priority", name: "priority", widget: "number", valueType: "int", default: 0, min: 0}
       - {label: "English body", name: "bodyEn", widget: "markdown"}
       - {label: "Estonian body", name: "bodyEt", widget: "markdown"}
-      - label: "Gallery"
+      - label: "Images"
         name: "galleryImages"
         widget: "list"
-        field: {label: "Image", name: "image", widget: "image"}
+        field: {label: "Image", name: "image", widget: "image", required: true}
   - label: "Translations"
     name: "translations"
     editor:

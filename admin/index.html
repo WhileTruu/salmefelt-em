@@ -19,7 +19,7 @@
             this.props.widgetsFor("galleryImages").map(function(a, index) {
               return h("img", {
                 key: index,
-                src: this.props.getAsset(a.getIn("data")).toString()
+                src: this.props.getAsset(a.getIn(["data"])).toString()
               });
             })
           );

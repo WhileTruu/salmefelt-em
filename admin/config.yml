@@ -23,16 +23,16 @@ collections:
     format: json
     slug: "{{slug}}-{{year}}-{{month}}-{{day}}-{{hour}}-{{minute}}-{{second}}"
     fields: # The fields for each document, usually in front matter
-      - {label: "English title", name: "titleEn", widget: "string", required: true}
-      - {label: "Estonian title", name: "titleEt", widget: "string", required: true}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Priority", name: "priority", widget: "number", valueType: "int", default: 0, min: 0}
-      - {label: "English body", name: "bodyEn", widget: "markdown"}
-      - {label: "Estonian body", name: "bodyEt", widget: "markdown"}
-      - label: "Gallery"
+      - {label: "English title", name: "titleEn", widget: string, required: true}
+      - {label: "Estonian title", name: "titleEt", widget: string, required: true}
+      - {label: "Publish Date", name: "date", widget: datetime}
+      - {label: "Priority", name: "priority", widget: number, valueType: int, default: 0, min: 0}
+      - {label: "English body", name: "bodyEn", widget: text}
+      - {label: "Estonian body", name: "bodyEt", widget: text}
+      - label: "Images"
         name: "galleryImages"
-        widget: "list"
-        field: {label: "Image", name: "image", widget: "image"}
+        widget: list
+        field: {label: "Image", name: "image", widget: image, required: true}
   - label: "Translations"
     name: "translations"
     editor:
@@ -45,7 +45,7 @@ collections:
         format: json
         fields:
           - { label: "slogan", name: "slogan", widget: string }
-          - { label: "home page content", name: "homePageContent", widget: markdown }
+          - { label: "home page content", name: "homePageContent", widget: text }
           - { label: "email", name: "email", widget: string }
           - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }
@@ -61,7 +61,7 @@ collections:
         format: json
         fields:
           - { label: "slogan", name: "slogan", widget: string }
-          - { label: "home page content", name: "homePageContent", widget: markdown }
+          - { label: "home page content", name: "homePageContent", widget: text }
           - { label: "email", name: "email", widget: string }
           - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }

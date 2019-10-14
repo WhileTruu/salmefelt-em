@@ -9,17 +9,72 @@
     <!-- Include the script that builds the page and powers Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      var ItemPreview = createClass({
+      const buttonStyle = isActive => ({
+        cursor: "pointer",
+        height: "36px",
+        lineHeight: "36px",
+        fontWeight: "500",
+        display: "block",
+        backgroundColor: isActive ? "rgb(85, 90, 101)" : "rgb(121, 130, 145)",
+        color: "rgb(255, 255, 255)",
+        borderWidth: "0px",
+        borderRadius: "5px",
+        padding: "0px 15px",
+        margin: "0px 10px"
+      });
+
+      const ItemPreview = createClass({
+        getInitialState() {
+          return { language: "en" };
+        },
+        clickedChangeLanguage(language) {
+          this.setState(() => {
+            return { language };
+          });
+        },
         render: function() {
+          const { props } = this;
+          const { language } = this.state;
+          const title = props.entry.getIn([
+            "data",
+            language === "en" ? "titleEn" : "titleEt"
+          ]);
+          const body = props.entry.getIn([
+            "data",
+            language === "en" ? "bodyEn" : "bodyEt"
+          ]);
+
           return h(
             "div",
             {},
-            h("h1", {}, this.props.entry.getIn(["titleEn"])),
-            h("p", {}, this.props.entry.getIn(["bodyEn"])),
-            this.props.widgetsFor("galleryImages").map(function(a, index) {
+            h(
+              "button",
+              {
+                onClick: () => this.clickedChangeLanguage("en"),
+                style: buttonStyle(language === "en")
+              },
+              "English"
+            ),
+            h(
+              "button",
+              {
+                onClick: () => this.clickedChangeLanguage("et"),
+                style: buttonStyle(language === "et")
+              },
+              "Estonian"
+            ),
+            h("h1", {}, title),
+            h("p", {}, body),
+            props.widgetsFor("galleryImages").map(function(a, index) {
               return h("img", {
                 key: index,
-                src: this.props.getAsset(a.getIn("data")).toString()
+                src: props.getAsset(a.getIn(["data"])).toString(),
+                style: {
+                  border: "1px solid #ddd",
+                  borderRadius: "4px",
+                  padding: "5px",
+                  width: "150px"
+                }
               });
             })
           );

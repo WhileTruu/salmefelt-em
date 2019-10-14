@@ -1,12 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Content Manager</title>
-</head>
-<body>
-<!-- Include the script that builds the page and powers Netlify CMS -->
-<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-</body>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      var ItemPreview = createClass({
+        render: function() {
+          return h(
+            "div",
+            {},
+            h("h1", {}, this.props.entry.getIn(["titleEn"])),
+            h("p", {}, this.props.entry.getIn(["bodyEn"])),
+            this.props.widgetsFor("galleryImages").map(function(a, index) {
+              return h("img", {
+                key: index,
+                src: this.props.getAsset(a.getIn("data")).toString()
+              });
+            })
+          );
+        }
+      });
+
+      CMS.registerPreviewTemplate("item", ItemPreview);
+    </script>
+  </body>
 </html>

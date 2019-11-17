@@ -1,7 +1,6 @@
 module Logo exposing (..)
 
 import Css
-import Style
 import Svg.Styled as Svg exposing (Svg)
 import Svg.Styled.Attributes as SvgAttrs
 
@@ -13,13 +12,32 @@ image styles =
         , SvgAttrs.height "66.858002"
         , SvgAttrs.viewBox "0 0 107.42083 17.689514"
         , SvgAttrs.css
-            ([ Css.fill Style.darkColor
-             , Css.overflow Css.visible
+            ([ Css.overflow Css.visible
+             , Css.property "filter" "drop-shadow(0 0 2px rgba(0, 0, 0, 0.11)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08))"
              ]
                 ++ styles
             )
         ]
-        [ Svg.g [ SvgAttrs.transform "translate(-39.000599,-218.84836)" ]
+        [ Svg.defs [ SvgAttrs.id "defs865" ]
+            [ Svg.linearGradient [ SvgAttrs.id "linearGradient873" ]
+                [ Svg.stop [ SvgAttrs.id "stop869", SvgAttrs.offset "0", SvgAttrs.style "stop-color:#b47350;stop-opacity:1" ] []
+                , Svg.stop [ SvgAttrs.id "stop871", SvgAttrs.offset "1", SvgAttrs.style "stop-color:#5a3c78;stop-opacity:1" ] []
+                ]
+            , Svg.linearGradient
+                [ SvgAttrs.gradientUnits "userSpaceOnUse"
+                , SvgAttrs.y2 "37.19145"
+                , SvgAttrs.x2 "425.5925"
+                , SvgAttrs.y1 "37.19145"
+                , SvgAttrs.x1 "0.4"
+                , SvgAttrs.id "linearGradient875"
+                , SvgAttrs.xlinkHref "#linearGradient873"
+                ]
+                []
+            ]
+        , Svg.g
+            [ SvgAttrs.style "fill-opacity:1;fill:url(#linearGradient875)"
+            , SvgAttrs.transform "translate(-39.000599,-218.84836)"
+            ]
             [ Svg.g [ SvgAttrs.transform "matrix(0.26458324,0,0,0.26458324,34.011616,216.85619)" ]
                 [ Svg.g []
                     [ Svg.path

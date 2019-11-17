@@ -9,6 +9,7 @@ import Item exposing (Item)
 import Items
 import Language as Language exposing (Language)
 import Logo
+import Markdown
 import Ports
 import Route exposing (Route)
 import Session exposing (Session)
@@ -37,8 +38,8 @@ instagramUrl =
 
 intro : Session -> HS.Html msg
 intro { language } =
-    HS.p [ HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
-        [ HS.text <| t language .homePageContent ]
+    HS.div [ HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
+        [ HS.fromUnstyled (Markdown.toHtml [] <| t language .homePageContent) ]
 
 
 getName : Language -> Item -> String
@@ -254,6 +255,7 @@ headerView ({ language } as session) =
             [ Logo.image [], languageButtons language ]
         , HS.h3 [] [ HS.text <| t language .slogan ]
         , contactInformation session
+        , intro session
         , facebookHyperlink
         , etsyHyperlink
         , instagramHyperlink
@@ -264,12 +266,10 @@ view : Session -> List (HS.Html Msg)
 view session =
     [ headerView session
     , HS.section [ HSA.css [ Css.paddingBottom (Css.rem 2.25), Style.container ] ]
-        (intro session
-            :: (Items.all
-                    |> List.indexedMap Tuple.pair
-                    |> List.sortBy (Tuple.second >> .priority)
-                    |> List.map (\( index, item ) -> itemView session index item)
-               )
+        (Items.all
+            |> List.indexedMap Tuple.pair
+            |> List.sortBy (Tuple.second >> .priority)
+            |> List.map (\( index, item ) -> itemView session index item)
         )
     ]
 

@@ -1,12 +1,12 @@
 {
-  "slogan": "ajaloost inspireeritud modernsed viltesemed",
-  "homePageContent": "Tere tulemast tutvuma Salmefelt OÜ käsitöötoodetega.\nMinu looming tuleb sügavalt südamest ja kannab edasi mu rõõme ja tundeid.",
-  "email": "e-post",
-  "emailAddress": "salmefelt@gmail.com",
+  "contact": "kontakt",
+  "companyName": "Salmefelt OÜ",
+  "homePageContent": "Minu looming on alguse saanud Salme rannakülas, ajaloolisel viikingilaevade ristumiskohas. Mind on inspireerinud lihtsad kadakased lambakarjamaad, kuhu kalurid parandamiseks mõrralinu laotasid. Kütkestav on edasi anda esivanemate tarkust ning kogemusi läbi iidsete viltimistehnikate loodud hubaste ja kodusoojade esemete. Aitäh vanematele, minu perekonnale, sõpradele ja kõigile, kes soovivad seda tunda. \nToodete tellimiseks kirjuta salmefelt@gmail.com või osta https://www.etsy.com/shop/salmefelt",
+  "contactName": "Taivi Truu",
   "phone": "telefon",
   "phoneNumber": "+372 5345 2868",
-  "contact": "kontakt",
-  "contactName": "Taivi Truu",
-  "companyName": "Salmefelt OÜ",
-  "pageNotFound": "Seda lehte pole olemas. 😞"
+  "emailAddress": "salmefelt@gmail.com",
+  "email": "e-post",
+  "pageNotFound": "Seda lehte pole olemas. 😞",
+  "slogan": "ajaloost inspireeritud modernsed viltesemed"
 }

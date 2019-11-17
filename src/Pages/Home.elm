@@ -38,7 +38,7 @@ instagramUrl =
 
 intro : Session -> HS.Html msg
 intro { language } =
-    HS.div [ HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
+    HS.div [ HSA.class "home-page-content", HSA.css [ Css.paddingBottom Style.largeSpacing ] ]
         [ HS.fromUnstyled (Markdown.toHtml [] <| t language .homePageContent) ]
 
 

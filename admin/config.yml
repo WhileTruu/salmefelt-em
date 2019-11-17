@@ -45,7 +45,7 @@ collections:
         format: json
         fields:
           - { label: "slogan", name: "slogan", widget: string }
-          - { label: "home page content", name: "homePageContent", widget: text }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
           - { label: "email", name: "email", widget: string }
           - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }
@@ -61,7 +61,7 @@ collections:
         format: json
         fields:
           - { label: "slogan", name: "slogan", widget: string }
-          - { label: "home page content", name: "homePageContent", widget: text }
+          - { label: "home page content", name: "homePageContent", widget: markdown }
           - { label: "email", name: "email", widget: string }
           - { label: "email address", name: "emailAddress", widget: string }
           - { label: "phone", name: "phone", widget: string }

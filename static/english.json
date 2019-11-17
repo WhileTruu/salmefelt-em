@@ -1,13 +1,12 @@
 {
-  "slogan": "modern felt handicraft inspired by Estonian history",
-  "homePageContent": "Welcome to Salmefelt Ltd handicraft products page.\nMy creations come from deep within my heart and carry my joy and feelings.",
-  "email": "e-mail",
-  "emailAddress": "salmefelt@gmail.com",
+  "contact": "contact us",
+  "companyName": "Salmefelt Ltd",
+  "homePageContent": "My creativity began in the coastal village of Salme, at a historic viking ship crossing. I have been inspired by simple juniper covered sheep pastures where fishermen laid their fish traps for repair. It's captivating to pass on the wisdom and experience of our ancestors through warm and homely items made with ancient felting techniques. Thank you to my parents, family, friends and everyone who wishes to feel this way as well!\n\nFind my creations in the [Etsy store](https://www.etsy.com/shop/salmefelt) or [write to me](salmefelt@gmail.com) directly.",
+  "contactName": "Taivi Truu",
   "phone": "phone",
   "phoneNumber": "+372 5345 2868",
-  "contact": "contact us",
-  "contactName": "Taivi Truu",
-  "companyName": "Salmefelt Ltd",
-  "pageNotFound": "This page does not exist. 😞"
+  "emailAddress": "salmefelt@gmail.com",
+  "email": "e-mail",
+  "pageNotFound": "This page does not exist. 😞",
+  "slogan": "modern felt handicraft inspired by Estonian history"
 }
-

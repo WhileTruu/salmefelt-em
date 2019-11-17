@@ -66,9 +66,10 @@
             h("h1", {}, title),
             h("p", {}, body),
             props.widgetsFor("galleryImages").map(function(a, index) {
+              const assetUrl = props.getAsset(a.getIn(["data"]))
               return h("img", {
                 key: index,
-                src: props.getAsset(a.getIn(["data"])).toString(),
+                src: "https://raw.githubusercontent.com/WhileTruu/salmefelt-em/master" + assetUrl,
                 style: {
                   border: "1px solid #ddd",
                   borderRadius: "4px",

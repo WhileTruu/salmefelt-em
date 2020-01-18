@@ -3,6 +3,7 @@ build/
 src/Files.elm
 src/Items.elm
 src/Translations
+static/uploads
 
 # elm-package generated files
 elm-stuff

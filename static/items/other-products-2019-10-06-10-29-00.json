@@ -1,15 +1,19 @@
 {
-  "titleEt": "Muud tooted",
   "titleEn": "Other Products",
+  "titleEt": "Muud tooted",
   "date": "2019-10-06T10:29:00.000Z",
   "priority": 11,
-  "bodyEt": "Lihtsalt armsad asjad",
   "bodyEn": "Just cute things",
+  "bodyEt": "Lihtsalt armsad asjad",
   "galleryImages": [
-    "/static/uploads/IMG_0091.jpg",
+    "/static/uploads/IMG_0092.JPG",
     "/static/uploads/67907406_506512536787801_6328531703887298560_n.jpg",
     "/static/uploads/69138411_2108944126066950_1299430144812777472_n.jpg",
-    "/static/uploads/IMG_5345.jpg",
-    "/static/uploads/IMG_5358.jpg"
+    "/static/uploads/IMG_5044.JPG",
+    "/static/uploads/IMG_6068.jpg",
+    "/static/uploads/IMG_5358.jpg",
+    "/static/uploads/FullSizeRender_74.jpg",
+    "/static/uploads/IMG_5101.jpg",
+    "/static/uploads/IMG_0014.JPG"
   ]
 }

@@ -58,5 +58,13 @@ optimizeimages:
 	convert * -strip -interlace Plane -resize 800x800 -sampling-factor 4:2:0 -quality 85 -set filename:x %t "../images/%[filename:x].jpg"
 
 
-
-
+.PHONY: develop
+develop:
+	npx elm-live \
+		src/Main.elm \
+		--open \
+		--start-page=index.html \
+		--hot \
+		-- \
+		--debug \
+		--output=main.js

@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -15,7 +15,7 @@ jobs:
 
     - name: Install dependencies 💿
       run: |
-        sudo apt install imagemagick
+        brew install imagemagick
         convert --version
         cat /etc/ImageMagick-7/policy.xml
         convert -list resource

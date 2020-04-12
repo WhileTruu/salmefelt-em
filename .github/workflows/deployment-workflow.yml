@@ -1,0 +1,32 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Install dependencies 💿
+      run: |
+        sudo apt install imagemagick
+        curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz
+        gunzip elm.gz
+        chmod +x elm
+        mv elm /usr/local/bin/
+ 
+    - name: Build 🔧
+      run: make build
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build

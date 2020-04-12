@@ -16,10 +16,9 @@ jobs:
     - name: Install dependencies 💿
       run: |
         brew install imagemagick
-        curl -L -o elm.gz https://github.com/elm/compiler/releases/download/0.19.1/binary-for-linux-64-bit.gz
-        gunzip elm.gz
-        chmod +x elm
-        sudo mv elm /usr/local/bin/
+        curl -L -o elm.pkg https://github.com/elm/compiler/releases/download/0.19.1/installer-for-mac.pkg
+        sudo installer -pkg elm.pkg -target /
+        rm elm.pkg
  
     - name: Build 🔧
       run: make build

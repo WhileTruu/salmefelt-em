@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      const buttonStyle = isActive => ({
+        cursor: "pointer",
+        height: "36px",
+        lineHeight: "36px",
+        fontWeight: "500",
+        display: "inline-block",
+        backgroundColor: isActive ? "rgb(85, 90, 101)" : "rgb(121, 130, 145)",
+        color: "rgb(255, 255, 255)",
+        borderWidth: "0px",
+        borderRadius: "5px",
+        padding: "0px 15px",
+        margin: "0px 10px"
+      });
+
+      const ItemPreview = createClass({
+        getInitialState() {
+          return { language: "en" };
+        },
+        clickedChangeLanguage(language) {
+          this.setState(() => {
+            return { language };
+          });
+        },
+        render: function() {
+          const { props } = this;
+          const { language } = this.state;
+          const title = props.entry.getIn([
+            "data",
+            language === "en" ? "titleEn" : "titleEt"
+          ]);
+          const body = props.entry.getIn([
+            "data",
+            language === "en" ? "bodyEn" : "bodyEt"
+          ]);
+
+          return h(
+            "div",
+            {},
+            h(
+              "button",
+              {
+                onClick: () => this.clickedChangeLanguage("en"),
+                style: buttonStyle(language === "en")
+              },
+              "English"
+            ),
+            h(
+              "button",
+              {
+                onClick: () => this.clickedChangeLanguage("et"),
+                style: buttonStyle(language === "et")
+              },
+              "Estonian"
+            ),
+            h("h1", {}, title),
+            h("p", {}, body),
+            props.widgetsFor("galleryImages").map(function(a, index) {
+              const assetUrl = props.getAsset(a.getIn(["data"]))
+              return h("img", {
+                key: index,
+                src: "https://raw.githubusercontent.com/WhileTruu/salmefelt-em/master" + assetUrl,
+                style: {
+                  border: "1px solid #ddd",
+                  borderRadius: "4px",
+                  padding: "5px",
+                  width: "150px"
+                }
+              });
+            })
+          );
+        }
+      });
+
+      CMS.registerPreviewTemplate("item", ItemPreview);
+    </script>
+  </body>
+</html>

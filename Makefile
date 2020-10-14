@@ -48,6 +48,7 @@ build:
 	mkdir -p build/static/images
 	cp -r static/images/ build/static/images/
 	cp -r static/uploads/ build/static/uploads/
+	cp -r admin build/admin
 
 
 .PHONY: optimizeimages
